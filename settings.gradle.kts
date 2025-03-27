@@ -1,4 +1,6 @@
 pluginManagement {
+    includeBuild("build-logic")
+
     repositories {
         google {
             content {
@@ -20,4 +22,17 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "PtPt"
+
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 include(":app")
+include(":feature:auth")
+include(":feature:record")
+include(":feature:my")
+include(":feature:home")
+include(":feature:matching")
+include(":feature:tracking")
+include(":core:data")
+include(":core:designsystem")
+include(":core:ui")
+include(":core:model")
+include(":core:domain")

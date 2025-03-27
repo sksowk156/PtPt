@@ -1,0 +1,33 @@
+root = true
+
+# https://pinterest.github.io/ktlint/latest/rules/standard/#__tabbed_20_2
+# 이 링크를 참고해서 설정
+
+[*]
+charset = utf-8
+end_of_line = lf
+max_line_length = 140
+indent_style = space
+indent_size = 4
+continuation_indent_size = 4
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.{kt,kts}]
+ij_kotlin_allow_trailing_comma = true
+ij_kotlin_allow_trailing_comma_on_call_site = true
+
+# KtLint Specific Rules
+ktlint_standard_annotation = disabled
+ktlint_standard_filename = disabled
+ktlint_standard_string-template-indent = disabled
+ktlint_standard_multiline-expression-wrapping = disabled
+ktlint_standard_property-naming = disabled
+ktlint_standard_no-wildcard-imports = disabled
+
+# 특정 어노테이션이 있는 함수는 네이밍 규칙 무시
+ktlint_function_naming_ignore_when_annotated_with = Composable, JvmName
+
+# Function Signature 규칙 추가 설정
+ktlint_function_signature_body_expression_wrapping = default
+ktlint_function_signature_rule_force_multiline_when_parameter_count_greater_or_equal_than = 2
