@@ -16,7 +16,7 @@ import com.paradise.core.designsystem.theme.schema.ptptDarkColorScheme
 import com.paradise.core.designsystem.theme.schema.ptptLightColorScheme
 
 @Composable
-fun PieceTheme(
+fun PtPtTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     typography: PtPtTypography = PtPtTheme.typography,
     shape: PtPtShape = PtPtTheme.shape,
