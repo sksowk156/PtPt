@@ -1,3 +1,5 @@
+package com.paradise.core.designsystem.component.button
+
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
@@ -15,17 +17,18 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.paradise.core.designsystem.component.button.base.BaseButton
 import com.paradise.core.designsystem.component.button.base.BaseButton.IconConfig
-import com.paradise.core.designsystem.component.button.base.BaseButton.PrimaryStyle
+import com.paradise.core.designsystem.component.button.base.BaseButton.OutlineStyle
 import com.paradise.core.designsystem.component.button.base.BaseButton.Size
 import com.paradise.core.designsystem.theme.PtPtTheme
 
 @Composable
-fun PrimaryButton(
+fun OutlinedButton(
     text: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     size: Size = Size.Medium,
     enabled: Boolean = true,
+    isSelected: Boolean = false,
     iconConfig: IconConfig = IconConfig.None,
     icon: (@Composable () -> Unit)? = { Icon(PtPtTheme.icon.none, contentDescription = "none") },
 ) {
@@ -33,9 +36,10 @@ fun PrimaryButton(
         text = text,
         onClick = onClick,
         modifier = modifier,
-        style = PrimaryStyle,
+        style = OutlineStyle,
         size = size,
         enabled = enabled,
+        isSelected = isSelected,
         iconConfig = iconConfig,
         icon = icon,
     )
@@ -44,7 +48,7 @@ fun PrimaryButton(
 @OptIn(ExperimentalLayoutApi::class)
 @Preview(showBackground = true, backgroundColor = 0xFFF0F0F0)
 @Composable
-fun PrimaryButtonPreview() {
+fun OutlinedButtonPreview() {
     PtPtTheme {
         Column(
             modifier = Modifier
@@ -64,27 +68,27 @@ fun PrimaryButtonPreview() {
                 verticalArrangement = Arrangement.spacedBy(8.dp),
             ) {
                 // 1-1. 아이콘 없는 기본 버튼
-                PrimaryButton(
+                OutlinedButton(
                     text = "Label",
                     onClick = { /* */ },
                 )
 
                 // 1-2. 아이콘이 앞에 오는 버튼
-                PrimaryButton(
+                OutlinedButton(
                     text = "Label",
                     onClick = { /* */ },
                     iconConfig = BaseButton.IconConfig.Start,
                 )
 
                 // 1-3. 아이콘이 뒤에 오는 버튼
-                PrimaryButton(
+                OutlinedButton(
                     text = "Label",
                     onClick = { /* */ },
                     iconConfig = BaseButton.IconConfig.End,
                 )
 
                 // 1-4. 아이콘만 있는 빈 텍스트 없이 버튼 (text="" 로 처리)
-                PrimaryButton(
+                OutlinedButton(
                     text = "Label",
                     onClick = { /* */ },
                     iconConfig = BaseButton.IconConfig.Both,
@@ -101,17 +105,17 @@ fun PrimaryButtonPreview() {
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                PrimaryButton(
+                OutlinedButton(
                     text = "Large",
                     onClick = { /* */ },
                     size = BaseButton.Size.Large,
                 )
-                PrimaryButton(
+                OutlinedButton(
                     text = "Medium",
                     onClick = { /* */ },
                     size = BaseButton.Size.Medium,
                 )
-                PrimaryButton(
+                OutlinedButton(
                     text = "Small",
                     onClick = { /* */ },
                     size = BaseButton.Size.Small,
@@ -126,7 +130,7 @@ fun PrimaryButtonPreview() {
             )
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 // 3-1. 활성 상태: 기본 색
-                PrimaryButton(
+                OutlinedButton(
                     text = "Active",
                     onClick = { /* */ },
                 )
@@ -134,12 +138,12 @@ fun PrimaryButtonPreview() {
                 // 실제로 컬러를 직접 지정하는 API가 없으므로,
                 // 배경 색을 바꾸고 싶다면 CustomizableButton.colors(...) 함수를 수정해야 합니다.
                 // 여기서는 예시로 두 번째 버튼을 Disabled 상태와 구별하기 위해 enabled=true 그대로 둡니다.
-                PrimaryButton(
+                OutlinedButton(
                     text = "Dark Green",
                     onClick = { /* */ },
                 )
                 // 3-3. 비활성화 상태
-                PrimaryButton(
+                OutlinedButton(
                     text = "Disabled",
                     onClick = { /* */ },
                     enabled = false,

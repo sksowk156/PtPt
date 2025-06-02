@@ -17,8 +17,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.paradise.core.designsystem.component.button.base.BaseButton
 import com.paradise.core.designsystem.component.button.base.BaseButton.IconConfig
+import com.paradise.core.designsystem.component.button.base.BaseButton.SecondaryStyle
 import com.paradise.core.designsystem.component.button.base.BaseButton.Size
-import com.paradise.core.designsystem.component.button.base.BaseButton.secondaryStyle
 import com.paradise.core.designsystem.theme.PtPtTheme
 
 @Composable
@@ -29,23 +29,24 @@ fun SecondaryButton(
     size: Size = Size.Medium,
     enabled: Boolean = true,
     iconConfig: IconConfig = IconConfig.None,
+    icon: (@Composable () -> Unit)? = { Icon(PtPtTheme.icon.none, contentDescription = "none") },
 ) {
     BaseButton(
         text = text,
         onClick = onClick,
         modifier = modifier,
-        style = secondaryStyle,
+        style = SecondaryStyle,
         size = size,
         enabled = enabled,
         iconConfig = iconConfig,
-        icon = { Icon(PtPtTheme.icon.none, contentDescription = "none") },
+        icon = icon,
     )
 }
 
 @OptIn(ExperimentalLayoutApi::class)
 @Preview(showBackground = true, backgroundColor = 0xFFF0F0F0)
 @Composable
-fun ImageButtonStylesPreview() {
+fun SecondaryButtonPreview() {
     PtPtTheme {
         Column(
             modifier = Modifier
