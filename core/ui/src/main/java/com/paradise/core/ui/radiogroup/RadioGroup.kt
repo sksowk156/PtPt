@@ -24,12 +24,12 @@ import com.paradise.core.ui.radiogroup.scope.RadioGroupScope
 @Composable
 fun <T> RadioGroup(
     modifier: Modifier = Modifier,
-    initial: T? = null,
-    default: T? = null,
+    initialSelection: T? = null,
+    clearedSelection: T? = null,
     onSelectionChanged: (T?) -> Unit = {},
     content: @Composable RadioGroupScope<T>.() -> Unit,
 ) {
-    var current by rememberSaveable { mutableStateOf<T?>(initial) }
+    var current by rememberSaveable { mutableStateOf<T?>(initialSelection) }
 
     val scope = remember {
         object : RadioGroupScope<T> {
@@ -37,7 +37,7 @@ fun <T> RadioGroup(
 
             override fun select(key: T) {
                 current = if (current == key) null else key
-                onSelectionChanged(current ?: default)
+                onSelectionChanged(current ?: clearedSelection)
             }
         }
     }
@@ -67,8 +67,8 @@ fun PrimaryButtonPreview() {
             Text(text = "마지막 선택: $last", color = Color.White)
 
             RadioGroup(
-                initial = "A",
-                default = "<none>",
+                initialSelection = "A",
+                clearedSelection = "<none>",
                 modifier = Modifier.fillMaxWidth(),
                 onSelectionChanged = { selected ->
                     // 선택이 바뀔 때마다 호출됨
