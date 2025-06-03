@@ -26,7 +26,7 @@ fun OutlinedButton(
     text: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    size: Size = Size.Medium,
+    size: Size = Size.Large,
     enabled: Boolean = true,
     isSelected: Boolean = false,
     iconConfig: IconConfig = IconConfig.None,

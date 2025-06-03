@@ -24,7 +24,7 @@ fun PrimaryButton(
     text: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    size: Size = Size.Medium,
+    size: Size = Size.Large,
     enabled: Boolean = true,
     iconConfig: IconConfig = IconConfig.None,
     icon: (@Composable () -> Unit)? = { Icon(PtPtTheme.icon.none, contentDescription = "none") },
