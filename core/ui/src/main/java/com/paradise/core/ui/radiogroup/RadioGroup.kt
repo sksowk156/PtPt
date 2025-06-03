@@ -54,7 +54,6 @@ fun <T> RadioGroup(
 @Composable
 fun PrimaryButtonPreview() {
     PtPtTheme {
-        // Box에 여백도 주고, 상태 확인용 문자열도 아래에 표시해 볼게요.
         var last by rememberSaveable { mutableStateOf<String?>("A") }
 
         Column(
@@ -71,8 +70,7 @@ fun PrimaryButtonPreview() {
                 clearedSelection = "<none>",
                 modifier = Modifier.fillMaxWidth(),
                 onSelectionChanged = { selected ->
-                    // 선택이 바뀔 때마다 호출됨
-                    last = selected?.toString()
+                    last = selected
                 },
             ) {
                 RadioButton(value = "A", text = "Apple", modifier = Modifier.fillMaxWidth())

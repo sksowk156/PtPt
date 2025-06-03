@@ -4,6 +4,7 @@ import PrimaryButton
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.LocalIndication
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
@@ -346,6 +347,7 @@ fun OutlinedButtonPreview() {
     PtPtTheme {
         Column(
             modifier = Modifier
+                .background(PtPtTheme.color.textBlack)
                 .padding(16.dp)
                 .fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(24.dp),
