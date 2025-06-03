@@ -8,9 +8,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -20,33 +20,23 @@ import androidx.compose.ui.unit.dp
 import com.paradise.core.designsystem.theme.PtPtTheme
 import com.paradise.core.ui.radiogroup.scope.RadioButton
 import com.paradise.core.ui.radiogroup.scope.RadioGroupScope
+import com.paradise.core.ui.radiogroup.scope.RadioGroupState
+import com.paradise.core.ui.radiogroup.scope.rememberRadioGroupState
 
 @Composable
 fun <T> RadioGroup(
+    state: RadioGroupState<T>,
     modifier: Modifier = Modifier,
-    initialSelection: T? = null,
-    clearedSelection: T? = null,
-    onSelectionChanged: (T?) -> Unit = {},
+    onChanged: (T?) -> Unit = {},
     content: @Composable RadioGroupScope<T>.() -> Unit,
 ) {
-    var current by rememberSaveable { mutableStateOf<T?>(initialSelection) }
-
-    val scope = remember {
-        object : RadioGroupScope<T> {
-            override val selectedKey: T? get() = current
-
-            override fun select(key: T) {
-                current = if (current == key) null else key
-                onSelectionChanged(current ?: clearedSelection)
-            }
-        }
-    }
+    LaunchedEffect(state.selectedKey) { onChanged(state.selectedKey) }
 
     Column(
-        modifier = modifier,
+        modifier,
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
-        scope.content()
+        state.content()
     }
 }
 
@@ -55,6 +45,8 @@ fun <T> RadioGroup(
 fun PrimaryButtonPreview() {
     PtPtTheme {
         var last by rememberSaveable { mutableStateOf<String?>("A") }
+
+        val radioState = rememberRadioGroupState(initial = "A")
 
         Column(
             modifier = Modifier
@@ -66,10 +58,9 @@ fun PrimaryButtonPreview() {
             Text(text = "마지막 선택: $last", color = Color.White)
 
             RadioGroup(
-                initialSelection = "A",
-                clearedSelection = "<none>",
+                state = radioState,
                 modifier = Modifier.fillMaxWidth(),
-                onSelectionChanged = { selected ->
+                onChanged = { selected ->
                     last = selected
                 },
             ) {
