@@ -4,8 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.Saver
-import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import com.paradise.core.designsystem.component.button.OutlinedButton
@@ -30,16 +29,7 @@ class RadioGroupState<T> internal constructor(initial: T? = null) : RadioGroupSc
 }
 
 @Composable
-fun <T> rememberRadioGroupState(
-    initial: T? = null,
-    save: (T?) -> String? = { it?.toString() },
-    restore: (String) -> T? = { null },
-): RadioGroupState<T> = rememberSaveable(
-    saver = Saver(
-        save = { save(it.selectedKey) },
-        restore = { RadioGroupState(restore(it)) },
-    ),
-) { RadioGroupState(initial) }
+fun <T> rememberRadioGroupState(initial: T? = null): RadioGroupState<T> = remember(initial) { RadioGroupState(initial) }
 
 @Composable
 fun <T> RadioGroupScope<T>.RadioButton(
