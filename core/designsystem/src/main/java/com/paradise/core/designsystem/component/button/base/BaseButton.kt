@@ -44,7 +44,7 @@ import com.paradise.core.designsystem.theme.schema.PtPtShape
 import com.paradise.core.designsystem.theme.schema.PtPtTypography
 
 object BaseButton {
-    interface ButtonStyle {
+    interface Style {
         val backgroundEnabledColor: Color @Composable get
         val backgroundPressedColor: Color @Composable get
         val backgroundDisabledColor: Color @Composable get
@@ -60,7 +60,7 @@ object BaseButton {
         val borderWidth: Dp
     }
 
-    object PrimaryStyle : ButtonStyle {
+    object PrimaryStyle : Style {
         private val themeColors @Composable get() = PtPtTheme.color
 
         override val backgroundEnabledColor @Composable get() = themeColors.primaryNormal
@@ -77,7 +77,7 @@ object BaseButton {
         override val borderWidth: Dp = 0.dp
     }
 
-    object SecondaryStyle : ButtonStyle {
+    object SecondaryStyle : Style {
         private val themeColors @Composable get() = PtPtTheme.color
 
         override val backgroundEnabledColor @Composable get() = themeColors.secondaryNormal
@@ -94,7 +94,7 @@ object BaseButton {
         override val borderWidth: Dp = 0.dp
     }
 
-    object OutlineStyle : ButtonStyle {
+    object OutlineStyle : Style {
         private val themeColors @Composable get() = PtPtTheme.color
 
         override val backgroundEnabledColor @Composable get() = Color.Transparent
@@ -134,7 +134,7 @@ object BaseButton {
         text: String,
         onClick: () -> Unit,
         modifier: Modifier = Modifier,
-        style: ButtonStyle = PrimaryStyle,
+        style: Style = PrimaryStyle,
         size: Size = Size.Medium,
         enabled: Boolean = true,
         isSelected: Boolean = false,
