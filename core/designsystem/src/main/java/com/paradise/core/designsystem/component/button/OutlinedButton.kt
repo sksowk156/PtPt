@@ -35,7 +35,7 @@ fun OutlinedButton(
         text = text,
         onClick = onClick,
         modifier = modifier,
-        style = BaseButton.Style.Outline,
+        style = BaseButton.OutlineStyle,
         size = size,
         enabled = enabled,
         isSelected = isSelected,

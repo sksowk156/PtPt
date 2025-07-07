@@ -12,8 +12,8 @@ import com.paradise.core.designsystem.theme.PtPtTheme
 @Composable
 fun StartCenterEndTopAppBar(
     title: String,
-    left: (@Composable RowScope.() -> Unit),
-    right: (@Composable RowScope.() -> Unit),
+    leftSlot: (@Composable RowScope.() -> Unit),
+    rightSlot: (@Composable RowScope.() -> Unit),
     modifier: Modifier = Modifier,
     style: BaseTopAppBar.Style = BaseTopAppBar.DefaultStyle,
     size: BaseTopAppBar.Size = BaseTopAppBar.Size.Default,
@@ -21,9 +21,9 @@ fun StartCenterEndTopAppBar(
     modifier = modifier,
     style = style,
     size = size,
-    left = left,
-    center = { Text(text = title) },
-    right = right,
+    leftSlot = leftSlot,
+    centerSlot = { Text(text = title) },
+    rightSlot = rightSlot,
 )
 
 @Preview(showBackground = true, backgroundColor = 0xFFEFEFEF)
@@ -32,13 +32,13 @@ private fun Preview_StartCenterEnd_LCR() {
     PtPtTheme {
         StartCenterEndTopAppBar(
             title = "Title",
-            left = {
+            leftSlot = {
                 PtPtIconButton(
                     imageVector = PtPtTheme.icon.back,
                     onClick = {},
                 )
             },
-            right = {
+            rightSlot = {
                 PtPtIconButton(
                     imageVector = PtPtTheme.icon.back,
                     onClick = {},

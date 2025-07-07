@@ -17,7 +17,7 @@ fun CenterTopAppBar(
     modifier = modifier,
     style = style,
     size = size,
-    center = { Text(text = title) },
+    centerSlot = { Text(text = title) },
 )
 
 @Preview(

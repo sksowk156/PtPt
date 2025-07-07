@@ -32,7 +32,7 @@ fun PrimaryButton(
         text = text,
         onClick = onClick,
         modifier = modifier,
-        style = BaseButton.Style.Primary,
+        style = BaseButton.PrimaryStyle,
         size = size,
         enabled = enabled,
         iconConfig = iconConfig,

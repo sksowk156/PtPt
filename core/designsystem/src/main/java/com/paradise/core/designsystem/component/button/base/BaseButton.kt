@@ -44,10 +44,71 @@ import com.paradise.core.designsystem.theme.schema.PtPtShape
 import com.paradise.core.designsystem.theme.schema.PtPtTypography
 
 object BaseButton {
-    enum class Style {
-        Primary,
-        Secondary,
-        Outline,
+    interface Style {
+        val backgroundEnabledColor: Color @Composable get
+        val backgroundPressedColor: Color @Composable get
+        val backgroundDisabledColor: Color @Composable get
+
+        val foregroundEnabledColor: Color @Composable get
+        val foregroundPressedColor: Color @Composable get
+        val foregroundDisabledColor: Color @Composable get
+
+        val borderEnabledColor: Color @Composable get
+        val borderPressedColor: Color @Composable get
+        val borderDisabledColor: Color @Composable get
+
+        val borderWidth: Dp
+    }
+
+    object PrimaryStyle : Style {
+        private val themeColors @Composable get() = PtPtTheme.color
+
+        override val backgroundEnabledColor @Composable get() = themeColors.primaryNormal
+        override val backgroundPressedColor @Composable get() = themeColors.primaryPressed
+        override val backgroundDisabledColor @Composable get() = themeColors.primaryNormal.copy(alpha = 0.4f)
+
+        override val foregroundEnabledColor @Composable get() = themeColors.textBlack
+        override val foregroundPressedColor @Composable get() = themeColors.textBlack
+        override val foregroundDisabledColor @Composable get() = themeColors.textBlack.copy(alpha = 0.4f)
+
+        override val borderEnabledColor @Composable get() = Color.Transparent
+        override val borderPressedColor @Composable get() = Color.Transparent
+        override val borderDisabledColor @Composable get() = Color.Transparent
+        override val borderWidth: Dp = 0.dp
+    }
+
+    object SecondaryStyle : Style {
+        private val themeColors @Composable get() = PtPtTheme.color
+
+        override val backgroundEnabledColor @Composable get() = themeColors.secondaryNormal
+        override val backgroundPressedColor @Composable get() = themeColors.secondaryPressed
+        override val backgroundDisabledColor @Composable get() = themeColors.secondaryNormal.copy(alpha = 0.3f)
+
+        override val foregroundEnabledColor @Composable get() = themeColors.textStrong
+        override val foregroundPressedColor @Composable get() = themeColors.textNeutral
+        override val foregroundDisabledColor @Composable get() = themeColors.textStrong.copy(alpha = 0.4f)
+
+        override val borderEnabledColor @Composable get() = Color.Transparent
+        override val borderPressedColor @Composable get() = Color.Transparent
+        override val borderDisabledColor @Composable get() = Color.Transparent
+        override val borderWidth: Dp = 0.dp
+    }
+
+    object OutlineStyle : Style {
+        private val themeColors @Composable get() = PtPtTheme.color
+
+        override val backgroundEnabledColor @Composable get() = Color.Transparent
+        override val backgroundPressedColor @Composable get() = Color.Transparent
+        override val backgroundDisabledColor @Composable get() = Color.Transparent
+
+        override val foregroundEnabledColor @Composable get() = themeColors.textNeutral
+        override val foregroundPressedColor @Composable get() = themeColors.primaryPressed
+        override val foregroundDisabledColor @Composable get() = themeColors.textNeutral.copy(alpha = 0.4f)
+
+        override val borderEnabledColor @Composable get() = themeColors.textAssist
+        override val borderPressedColor @Composable get() = themeColors.primaryNormal
+        override val borderDisabledColor @Composable get() = themeColors.textAssist.copy(alpha = 0.4f)
+        override val borderWidth: Dp = 1.dp
     }
 
     enum class Size(
@@ -82,64 +143,6 @@ object BaseButton {
         End,
         Both,
     }
-
-    @Composable
-    fun getStyleColors(style: Style): StyleColors {
-        val themeColors = PtPtTheme.color
-        return when (style) {
-            Style.Primary -> StyleColors(
-                backgroundEnabled = themeColors.primaryNormal,
-                backgroundPressed = themeColors.primaryPressed,
-                backgroundDisabled = themeColors.primaryNormal.copy(alpha = 0.4f),
-                foregroundEnabled = themeColors.textBlack,
-                foregroundPressed = themeColors.textBlack,
-                foregroundDisabled = themeColors.textBlack.copy(alpha = 0.4f),
-                borderEnabled = Color.Transparent,
-                borderPressed = Color.Transparent,
-                borderDisabled = Color.Transparent,
-                borderWidth = 0.dp,
-            )
-
-            Style.Secondary -> StyleColors(
-                backgroundEnabled = themeColors.secondaryNormal,
-                backgroundPressed = themeColors.secondaryPressed,
-                backgroundDisabled = themeColors.secondaryNormal.copy(alpha = 0.3f),
-                foregroundEnabled = themeColors.textStrong,
-                foregroundPressed = themeColors.textNeutral,
-                foregroundDisabled = themeColors.textStrong.copy(alpha = 0.4f),
-                borderEnabled = Color.Transparent,
-                borderPressed = Color.Transparent,
-                borderDisabled = Color.Transparent,
-                borderWidth = 0.dp,
-            )
-
-            Style.Outline -> StyleColors(
-                backgroundEnabled = Color.Transparent,
-                backgroundPressed = Color.Transparent,
-                backgroundDisabled = Color.Transparent,
-                foregroundEnabled = themeColors.textNeutral,
-                foregroundPressed = themeColors.primaryPressed,
-                foregroundDisabled = themeColors.textNeutral.copy(alpha = 0.4f),
-                borderEnabled = themeColors.textAssist,
-                borderPressed = themeColors.primaryNormal,
-                borderDisabled = themeColors.textAssist.copy(alpha = 0.4f),
-                borderWidth = 1.dp,
-            )
-        }
-    }
-
-    data class StyleColors(
-        val backgroundEnabled: Color,
-        val backgroundPressed: Color,
-        val backgroundDisabled: Color,
-        val foregroundEnabled: Color,
-        val foregroundPressed: Color,
-        val foregroundDisabled: Color,
-        val borderEnabled: Color,
-        val borderPressed: Color,
-        val borderDisabled: Color,
-        val borderWidth: Dp,
-    )
 }
 
 @Composable
@@ -147,7 +150,7 @@ fun BaseButton(
     text: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    style: BaseButton.Style = BaseButton.Style.Primary,
+    style: BaseButton.Style = BaseButton.PrimaryStyle,
     size: BaseButton.Size = BaseButton.Size.Medium,
     enabled: Boolean = true,
     isSelected: Boolean = false,
@@ -162,31 +165,28 @@ fun BaseButton(
     //    • 일반(Primary/Secondary) 스타일은 실제 누를 때 pressed를 사용
     //    • Outline 스타일은 라디오처럼 isSelected 값으로 "항상 눌린" 모양을 유지
     val isActivePressedState = when (style) {
-        BaseButton.Style.Outline -> isSelected
+        BaseButton.OutlineStyle -> isSelected
         else -> isPressed
     }
 
-    // 2. 스타일 색상 가져오기
-    val styleColors = BaseButton.getStyleColors(style)
-
-    // 3. 상태별 색 결정
+    // 2. 상태별 색 결정
     val targetBackgroundColor = when {
-        isActivePressedState -> styleColors.backgroundPressed
-        !enabled -> styleColors.backgroundDisabled
-        else -> styleColors.backgroundEnabled
+        isActivePressedState -> style.backgroundPressedColor
+        !enabled -> style.backgroundDisabledColor
+        else -> style.backgroundEnabledColor
     }
     val targetForegroundColor = when {
-        isActivePressedState -> styleColors.foregroundPressed
-        !enabled -> styleColors.foregroundDisabled
-        else -> styleColors.foregroundEnabled
+        isActivePressedState -> style.foregroundPressedColor
+        !enabled -> style.foregroundDisabledColor
+        else -> style.foregroundEnabledColor
     }
     val targetBorderColor = when {
-        isActivePressedState -> styleColors.borderPressed
-        !enabled -> styleColors.borderDisabled
-        else -> styleColors.borderEnabled
+        isActivePressedState -> style.borderPressedColor
+        !enabled -> style.borderDisabledColor
+        else -> style.borderEnabledColor
     }
 
-    // 4. 애니메이션
+    // 3. 애니메이션
     val animatedBackgroundColor by animateColorAsState(
         targetValue = targetBackgroundColor,
         label = "buttonBackgroundAnimation",
@@ -196,7 +196,7 @@ fun BaseButton(
         label = "buttonBorderAnimation",
     )
 
-    // 5. 텍스트 스타일·Shape·아이콘 크기 계산
+    // 4. 텍스트 스타일·Shape·아이콘 크기 계산
     val textStyle = size.textStyleKey(PtPtTheme.typography)
     val buttonShape = size.shapeKey(PtPtTheme.shape)
     val iconSize = textStyle.lineHeight.value.dp
@@ -206,14 +206,14 @@ fun BaseButton(
         0.dp
     }
 
-    // 6. 실제 레이아웃
+    // 5. 실제 레이아웃
     Surface(
         modifier = modifier.height(size.height),
         shape = buttonShape,
         color = animatedBackgroundColor,
-        border = if (styleColors.borderWidth > 0.dp) {
+        border = if (style.borderWidth > 0.dp) {
             BorderStroke(
-                width = styleColors.borderWidth,
+                width = style.borderWidth,
                 color = animatedBorderColor,
             )
         } else {

@@ -34,7 +34,7 @@ fun SecondaryButton(
         text = text,
         onClick = onClick,
         modifier = modifier,
-        style = BaseButton.Style.Secondary,
+        style = BaseButton.SecondaryStyle,
         size = size,
         enabled = enabled,
         iconConfig = iconConfig,

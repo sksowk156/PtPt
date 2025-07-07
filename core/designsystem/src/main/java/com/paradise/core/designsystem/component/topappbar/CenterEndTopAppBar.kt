@@ -12,7 +12,7 @@ import com.paradise.core.designsystem.theme.PtPtTheme
 @Composable
 fun CenterEndTopAppBar(
     title: String,
-    right: (@Composable RowScope.() -> Unit),
+    rightSlot: (@Composable RowScope.() -> Unit),
     modifier: Modifier = Modifier,
     style: BaseTopAppBar.Style = BaseTopAppBar.DefaultStyle,
     size: BaseTopAppBar.Size = BaseTopAppBar.Size.Default,
@@ -20,8 +20,8 @@ fun CenterEndTopAppBar(
     modifier = modifier,
     style = style,
     size = size,
-    center = { Text(text = title) },
-    right = right,
+    centerSlot = { Text(text = title) },
+    rightSlot = rightSlot,
 )
 
 @Preview(
@@ -34,7 +34,7 @@ private fun Preview_CenterEndTopAppBar() {
     PtPtTheme {
         CenterEndTopAppBar(
             title = "Title",
-            right = {
+            rightSlot = {
                 PtPtIconButton(
                     imageVector = PtPtTheme.icon.plusCircle,
                     onClick = {},
