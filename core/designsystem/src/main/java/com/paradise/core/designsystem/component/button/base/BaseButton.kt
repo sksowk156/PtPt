@@ -44,71 +44,10 @@ import com.paradise.core.designsystem.theme.schema.PtPtShape
 import com.paradise.core.designsystem.theme.schema.PtPtTypography
 
 object BaseButton {
-    interface Style {
-        val backgroundEnabledColor: Color @Composable get
-        val backgroundPressedColor: Color @Composable get
-        val backgroundDisabledColor: Color @Composable get
-
-        val foregroundEnabledColor: Color @Composable get
-        val foregroundPressedColor: Color @Composable get
-        val foregroundDisabledColor: Color @Composable get
-
-        val borderEnabledColor: Color @Composable get
-        val borderPressedColor: Color @Composable get
-        val borderDisabledColor: Color @Composable get
-
-        val borderWidth: Dp
-    }
-
-    object PrimaryStyle : Style {
-        private val themeColors @Composable get() = PtPtTheme.color
-
-        override val backgroundEnabledColor @Composable get() = themeColors.primaryNormal
-        override val backgroundPressedColor @Composable get() = themeColors.primaryPressed
-        override val backgroundDisabledColor @Composable get() = themeColors.primaryNormal.copy(alpha = .4f)
-
-        override val foregroundEnabledColor @Composable get() = themeColors.textBlack
-        override val foregroundPressedColor @Composable get() = themeColors.textBlack
-        override val foregroundDisabledColor @Composable get() = themeColors.textBlack.copy(alpha = .4f)
-
-        override val borderEnabledColor @Composable get() = Color.Transparent
-        override val borderPressedColor @Composable get() = Color.Transparent
-        override val borderDisabledColor @Composable get() = Color.Transparent
-        override val borderWidth: Dp = 0.dp
-    }
-
-    object SecondaryStyle : Style {
-        private val themeColors @Composable get() = PtPtTheme.color
-
-        override val backgroundEnabledColor @Composable get() = themeColors.secondaryNormal
-        override val backgroundPressedColor @Composable get() = themeColors.secondaryPressed
-        override val backgroundDisabledColor @Composable get() = themeColors.secondaryNormal.copy(alpha = .3f)
-
-        override val foregroundEnabledColor @Composable get() = themeColors.textStrong
-        override val foregroundPressedColor @Composable get() = themeColors.textNeutral
-        override val foregroundDisabledColor @Composable get() = themeColors.textStrong.copy(alpha = .4f)
-
-        override val borderEnabledColor @Composable get() = Color.Transparent
-        override val borderPressedColor @Composable get() = Color.Transparent
-        override val borderDisabledColor @Composable get() = Color.Transparent
-        override val borderWidth: Dp = 0.dp
-    }
-
-    object OutlineStyle : Style {
-        private val themeColors @Composable get() = PtPtTheme.color
-
-        override val backgroundEnabledColor @Composable get() = Color.Transparent
-        override val backgroundPressedColor @Composable get() = Color.Transparent
-        override val backgroundDisabledColor @Composable get() = Color.Transparent
-
-        override val foregroundEnabledColor @Composable get() = themeColors.textNeutral
-        override val foregroundPressedColor @Composable get() = themeColors.primaryPressed
-        override val foregroundDisabledColor @Composable get() = themeColors.textNeutral.copy(alpha = .4f)
-
-        override val borderEnabledColor @Composable get() = themeColors.textAssist
-        override val borderPressedColor @Composable get() = themeColors.primaryNormal
-        override val borderDisabledColor @Composable get() = themeColors.textAssist.copy(alpha = .4f)
-        override val borderWidth: Dp = 1.dp
+    enum class Style {
+        Primary,
+        Secondary,
+        Outline,
     }
 
     enum class Size(
@@ -117,9 +56,24 @@ object BaseButton {
         val textStyleKey: (PtPtTypography) -> TextStyle,
         val shapeKey: (PtPtShape) -> Shape,
     ) {
-        Small(32.dp, 14.dp, { it.caption01 }, { it.s }),
-        Medium(40.dp, 20.dp, { it.body03 }, { it.m }),
-        Large(48.dp, 24.dp, { it.body01 }, { it.l }),
+        Small(
+            height = 32.dp,
+            horizontalPadding = 14.dp,
+            textStyleKey = { typography -> typography.caption01 },
+            shapeKey = { shape -> shape.s },
+        ),
+        Medium(
+            height = 40.dp,
+            horizontalPadding = 20.dp,
+            textStyleKey = { typography -> typography.body03 },
+            shapeKey = { shape -> shape.m },
+        ),
+        Large(
+            height = 48.dp,
+            horizontalPadding = 24.dp,
+            textStyleKey = { typography -> typography.body01 },
+            shapeKey = { shape -> shape.l },
+        ),
     }
 
     enum class IconConfig {
@@ -130,101 +84,182 @@ object BaseButton {
     }
 
     @Composable
-    operator fun invoke(
-        text: String,
-        onClick: () -> Unit,
-        modifier: Modifier = Modifier,
-        style: Style = PrimaryStyle,
-        size: Size = Size.Medium,
-        enabled: Boolean = true,
-        isSelected: Boolean = false,
-        iconConfig: IconConfig = IconConfig.None,
-        icon: @Composable (() -> Unit)? = null,
-    ) {
-        // 1. 상호작용(Pressed) 추적
-        val interactionSource = remember { MutableInteractionSource() }
-        val pressed by interactionSource.collectIsPressedAsState()
+    fun getStyleColors(style: Style): StyleColors {
+        val themeColors = PtPtTheme.color
+        return when (style) {
+            Style.Primary -> StyleColors(
+                backgroundEnabled = themeColors.primaryNormal,
+                backgroundPressed = themeColors.primaryPressed,
+                backgroundDisabled = themeColors.primaryNormal.copy(alpha = 0.4f),
+                foregroundEnabled = themeColors.textBlack,
+                foregroundPressed = themeColors.textBlack,
+                foregroundDisabled = themeColors.textBlack.copy(alpha = 0.4f),
+                borderEnabled = Color.Transparent,
+                borderPressed = Color.Transparent,
+                borderDisabled = Color.Transparent,
+                borderWidth = 0.dp,
+            )
 
-        // 1-1. “활성된 눌린 상태” 판단
-        //    • 일반(Primary/Secondary) 스타일은 실제 누를 때 pressed를 사용
-        //    • OutlinedStyle 은 라디오처럼 isSelected 값으로 “항상 눌린” 모양을 유지
-        val isActivePressed = when (style) {
-            OutlineStyle -> isSelected
-            else -> pressed
-        }
+            Style.Secondary -> StyleColors(
+                backgroundEnabled = themeColors.secondaryNormal,
+                backgroundPressed = themeColors.secondaryPressed,
+                backgroundDisabled = themeColors.secondaryNormal.copy(alpha = 0.3f),
+                foregroundEnabled = themeColors.textStrong,
+                foregroundPressed = themeColors.textNeutral,
+                foregroundDisabled = themeColors.textStrong.copy(alpha = 0.4f),
+                borderEnabled = Color.Transparent,
+                borderPressed = Color.Transparent,
+                borderDisabled = Color.Transparent,
+                borderWidth = 0.dp,
+            )
 
-        // 2. 상태별 색 결정
-        val bgTarget = when {
-            isActivePressed -> style.backgroundPressedColor
-            !enabled -> style.backgroundDisabledColor
-            else -> style.backgroundEnabledColor
+            Style.Outline -> StyleColors(
+                backgroundEnabled = Color.Transparent,
+                backgroundPressed = Color.Transparent,
+                backgroundDisabled = Color.Transparent,
+                foregroundEnabled = themeColors.textNeutral,
+                foregroundPressed = themeColors.primaryPressed,
+                foregroundDisabled = themeColors.textNeutral.copy(alpha = 0.4f),
+                borderEnabled = themeColors.textAssist,
+                borderPressed = themeColors.primaryNormal,
+                borderDisabled = themeColors.textAssist.copy(alpha = 0.4f),
+                borderWidth = 1.dp,
+            )
         }
-        val fgTarget = when {
-            isActivePressed -> style.foregroundPressedColor
-            !enabled -> style.foregroundDisabledColor
-            else -> style.foregroundEnabledColor
-        }
-        val strokeTarget = when {
-            isActivePressed -> style.borderPressedColor
-            !enabled -> style.borderDisabledColor
-            else -> style.borderEnabledColor
-        }
+    }
 
-        // 3. 애니메이션
-        val animatedBg by animateColorAsState(bgTarget, label = "buttonBackground")
-        val animatedStroke by animateColorAsState(strokeTarget, label = "buttonBorder")
+    data class StyleColors(
+        val backgroundEnabled: Color,
+        val backgroundPressed: Color,
+        val backgroundDisabled: Color,
+        val foregroundEnabled: Color,
+        val foregroundPressed: Color,
+        val foregroundDisabled: Color,
+        val borderEnabled: Color,
+        val borderPressed: Color,
+        val borderDisabled: Color,
+        val borderWidth: Dp,
+    )
+}
 
-        // 4. 텍스트 스타일·Shape·아이콘 크기 계산
-        val txtStyle = size.textStyleKey(PtPtTheme.typography)
-        val shape = size.shapeKey(PtPtTheme.shape)
-        val iconSize = txtStyle.lineHeight.value.dp
-        val spacing = if (icon != null && iconConfig != IconConfig.None && text.isNotBlank()) {
-            4.dp
+@Composable
+fun BaseButton(
+    text: String,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    style: BaseButton.Style = BaseButton.Style.Primary,
+    size: BaseButton.Size = BaseButton.Size.Medium,
+    enabled: Boolean = true,
+    isSelected: Boolean = false,
+    iconConfig: BaseButton.IconConfig = BaseButton.IconConfig.None,
+    icon: @Composable (() -> Unit)? = null,
+) {
+    // 1. 상호작용(Pressed) 추적
+    val interactionSource = remember { MutableInteractionSource() }
+    val isPressed by interactionSource.collectIsPressedAsState()
+
+    // 1-1. "활성된 눌린 상태" 판단
+    //    • 일반(Primary/Secondary) 스타일은 실제 누를 때 pressed를 사용
+    //    • Outline 스타일은 라디오처럼 isSelected 값으로 "항상 눌린" 모양을 유지
+    val isActivePressedState = when (style) {
+        BaseButton.Style.Outline -> isSelected
+        else -> isPressed
+    }
+
+    // 2. 스타일 색상 가져오기
+    val styleColors = BaseButton.getStyleColors(style)
+
+    // 3. 상태별 색 결정
+    val targetBackgroundColor = when {
+        isActivePressedState -> styleColors.backgroundPressed
+        !enabled -> styleColors.backgroundDisabled
+        else -> styleColors.backgroundEnabled
+    }
+    val targetForegroundColor = when {
+        isActivePressedState -> styleColors.foregroundPressed
+        !enabled -> styleColors.foregroundDisabled
+        else -> styleColors.foregroundEnabled
+    }
+    val targetBorderColor = when {
+        isActivePressedState -> styleColors.borderPressed
+        !enabled -> styleColors.borderDisabled
+        else -> styleColors.borderEnabled
+    }
+
+    // 4. 애니메이션
+    val animatedBackgroundColor by animateColorAsState(
+        targetValue = targetBackgroundColor,
+        label = "buttonBackgroundAnimation",
+    )
+    val animatedBorderColor by animateColorAsState(
+        targetValue = targetBorderColor,
+        label = "buttonBorderAnimation",
+    )
+
+    // 5. 텍스트 스타일·Shape·아이콘 크기 계산
+    val textStyle = size.textStyleKey(PtPtTheme.typography)
+    val buttonShape = size.shapeKey(PtPtTheme.shape)
+    val iconSize = textStyle.lineHeight.value.dp
+    val spacingBetweenIconAndText = if (icon != null && iconConfig != BaseButton.IconConfig.None && text.isNotBlank()) {
+        4.dp
+    } else {
+        0.dp
+    }
+
+    // 6. 실제 레이아웃
+    Surface(
+        modifier = modifier.height(size.height),
+        shape = buttonShape,
+        color = animatedBackgroundColor,
+        border = if (styleColors.borderWidth > 0.dp) {
+            BorderStroke(
+                width = styleColors.borderWidth,
+                color = animatedBorderColor,
+            )
         } else {
-            0.dp
-        }
-
-        // 5. 실제 레이아웃
-        Surface(
-            modifier = modifier.height(size.height),
-            shape = shape,
-            color = animatedBg,
-            border = if (style.borderWidth > 0.dp) {
-                BorderStroke(style.borderWidth, animatedStroke)
-            } else {
-                null
-            },
+            null
+        },
+    ) {
+        Row(
+            modifier = Modifier
+                .clickable(
+                    enabled = enabled,
+                    interactionSource = interactionSource,
+                    indication = LocalIndication.current,
+                    onClick = onClick,
+                )
+                .padding(horizontal = size.horizontalPadding),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center,
         ) {
-            Row(
-                modifier = Modifier
-                    .clickable(
-                        enabled = enabled,
-                        interactionSource = interactionSource,
-                        indication = LocalIndication.current,
-                        onClick = onClick,
-                    )
-                    .padding(horizontal = size.horizontalPadding),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center,
-            ) {
-                CompositionLocalProvider(LocalContentColor provides fgTarget) {
-                    if (icon != null && (iconConfig == IconConfig.Start || iconConfig == IconConfig.Both)) {
-                        Box(Modifier.size(iconSize)) { icon() }
-                        if (text.isNotBlank()) Spacer(Modifier.width(spacing))
+            CompositionLocalProvider(LocalContentColor provides targetForegroundColor) {
+                // Start Icon
+                if (icon != null && (iconConfig == BaseButton.IconConfig.Start || iconConfig == BaseButton.IconConfig.Both)) {
+                    Box(modifier = Modifier.size(iconSize)) {
+                        icon()
                     }
-
                     if (text.isNotBlank()) {
-                        Text(
-                            text = text,
-                            style = txtStyle,
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis,
-                        )
+                        Spacer(modifier = Modifier.width(spacingBetweenIconAndText))
                     }
+                }
 
-                    if (icon != null && (iconConfig == IconConfig.End || iconConfig == IconConfig.Both)) {
-                        if (text.isNotBlank()) Spacer(Modifier.width(spacing))
-                        Box(Modifier.size(iconSize)) { icon() }
+                // Text
+                if (text.isNotBlank()) {
+                    Text(
+                        text = text,
+                        style = textStyle,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                    )
+                }
+
+                // End Icon
+                if (icon != null && (iconConfig == BaseButton.IconConfig.End || iconConfig == BaseButton.IconConfig.Both)) {
+                    if (text.isNotBlank()) {
+                        Spacer(modifier = Modifier.width(spacingBetweenIconAndText))
+                    }
+                    Box(modifier = Modifier.size(iconSize)) {
+                        icon()
                     }
                 }
             }

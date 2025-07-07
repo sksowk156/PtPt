@@ -17,7 +17,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.paradise.core.designsystem.component.button.base.BaseButton
 import com.paradise.core.designsystem.component.button.base.BaseButton.IconConfig
-import com.paradise.core.designsystem.component.button.base.BaseButton.SecondaryStyle
 import com.paradise.core.designsystem.component.button.base.BaseButton.Size
 import com.paradise.core.designsystem.theme.PtPtTheme
 
@@ -35,7 +34,7 @@ fun SecondaryButton(
         text = text,
         onClick = onClick,
         modifier = modifier,
-        style = SecondaryStyle,
+        style = BaseButton.Style.Secondary,
         size = size,
         enabled = enabled,
         iconConfig = iconConfig,
@@ -75,21 +74,21 @@ fun SecondaryButtonPreview() {
                 SecondaryButton(
                     text = "Label",
                     onClick = { /* */ },
-                    iconConfig = BaseButton.IconConfig.Start,
+                    iconConfig = IconConfig.Start,
                 )
 
                 // 1-3. 아이콘이 뒤에 오는 버튼
                 SecondaryButton(
                     text = "Label",
                     onClick = { /* */ },
-                    iconConfig = BaseButton.IconConfig.End,
+                    iconConfig = IconConfig.End,
                 )
 
                 // 1-4. 아이콘만 있는 빈 텍스트 없이 버튼 (text="" 로 처리)
                 SecondaryButton(
                     text = "Label",
                     onClick = { /* */ },
-                    iconConfig = BaseButton.IconConfig.Both,
+                    iconConfig = IconConfig.Both,
                 )
             }
 
@@ -106,17 +105,17 @@ fun SecondaryButtonPreview() {
                 SecondaryButton(
                     text = "Large",
                     onClick = { /* */ },
-                    size = BaseButton.Size.Large,
+                    size = Size.Large,
                 )
                 SecondaryButton(
                     text = "Medium",
                     onClick = { /* */ },
-                    size = BaseButton.Size.Medium,
+                    size = Size.Medium,
                 )
                 SecondaryButton(
                     text = "Small",
                     onClick = { /* */ },
-                    size = BaseButton.Size.Small,
+                    size = Size.Small,
                 )
             }
 

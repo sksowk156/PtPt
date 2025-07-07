@@ -15,7 +15,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.paradise.core.designsystem.component.button.base.BaseButton
 import com.paradise.core.designsystem.component.button.base.BaseButton.IconConfig
-import com.paradise.core.designsystem.component.button.base.BaseButton.PrimaryStyle
 import com.paradise.core.designsystem.component.button.base.BaseButton.Size
 import com.paradise.core.designsystem.theme.PtPtTheme
 
@@ -33,7 +32,7 @@ fun PrimaryButton(
         text = text,
         onClick = onClick,
         modifier = modifier,
-        style = PrimaryStyle,
+        style = BaseButton.Style.Primary,
         size = size,
         enabled = enabled,
         iconConfig = iconConfig,
@@ -73,21 +72,21 @@ fun PrimaryButtonPreview() {
                 PrimaryButton(
                     text = "Label",
                     onClick = { /* */ },
-                    iconConfig = BaseButton.IconConfig.Start,
+                    iconConfig = IconConfig.Start,
                 )
 
                 // 1-3. 아이콘이 뒤에 오는 버튼
                 PrimaryButton(
                     text = "Label",
                     onClick = { /* */ },
-                    iconConfig = BaseButton.IconConfig.End,
+                    iconConfig = IconConfig.End,
                 )
 
                 // 1-4. 아이콘만 있는 빈 텍스트 없이 버튼 (text="" 로 처리)
                 PrimaryButton(
                     text = "Label",
                     onClick = { /* */ },
-                    iconConfig = BaseButton.IconConfig.Both,
+                    iconConfig = IconConfig.Both,
                 )
             }
 
@@ -104,17 +103,17 @@ fun PrimaryButtonPreview() {
                 PrimaryButton(
                     text = "Large",
                     onClick = { /* */ },
-                    size = BaseButton.Size.Large,
+                    size = Size.Large,
                 )
                 PrimaryButton(
                     text = "Medium",
                     onClick = { /* */ },
-                    size = BaseButton.Size.Medium,
+                    size = Size.Medium,
                 )
                 PrimaryButton(
                     text = "Small",
                     onClick = { /* */ },
-                    size = BaseButton.Size.Small,
+                    size = Size.Small,
                 )
             }
 
