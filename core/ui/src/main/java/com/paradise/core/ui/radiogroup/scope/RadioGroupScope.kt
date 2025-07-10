@@ -18,30 +18,34 @@ interface RadioGroupScope<T> {
 }
 
 @Stable
-class RadioGroupState<T> internal constructor(initial: T? = null) : RadioGroupScope<T> {
-    private var selected: T? by mutableStateOf(initial)
+class RadioGroupScopeImpl<T>(initial: T?) : RadioGroupScope<T> {
+    private var _selected by mutableStateOf(initial)
 
-    override val selectedKey: T? get() = selected
+    override val selectedKey: T? get() = _selected
 
     override fun select(key: T) {
-        selected = if (selected == key) null else key
+        _selected = if (_selected == key) null else key
     }
 }
 
 @Composable
-fun <T> rememberRadioGroupState(initial: T? = null): RadioGroupState<T> = remember(initial) { RadioGroupState(initial) }
+fun <T> rememberRadioGroupState(initial: T? = null): RadioGroupScope<T> = remember(initial) { RadioGroupScopeImpl(initial) }
 
 @Composable
 fun <T> RadioGroupScope<T>.RadioButton(
     value: T,
     text: String,
     modifier: Modifier = Modifier,
+    onSelect: (T) -> Unit,
     size: BaseButton.Size = BaseButton.Size.Large,
     icon: (@Composable () -> Unit)? = null,
 ) {
     OutlinedButton(
         text = text,
-        onClick = { this.select(value) },
+        onClick = {
+            this.select(value)
+            onSelect(value)
+        },
         modifier = modifier,
         size = size,
         enabled = true,

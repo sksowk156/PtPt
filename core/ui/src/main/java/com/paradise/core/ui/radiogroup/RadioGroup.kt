@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -20,33 +19,29 @@ import androidx.compose.ui.unit.dp
 import com.paradise.core.designsystem.theme.PtPtTheme
 import com.paradise.core.ui.radiogroup.scope.RadioButton
 import com.paradise.core.ui.radiogroup.scope.RadioGroupScope
-import com.paradise.core.ui.radiogroup.scope.RadioGroupState
 import com.paradise.core.ui.radiogroup.scope.rememberRadioGroupState
 
 @Composable
 fun <T> RadioGroup(
-    state: RadioGroupState<T>,
     modifier: Modifier = Modifier,
-    onChanged: (T?) -> Unit = {},
+    initial: T? = null,
     content: @Composable RadioGroupScope<T>.() -> Unit,
 ) {
-    LaunchedEffect(state.selectedKey) { onChanged(state.selectedKey) }
+    val groupState = rememberRadioGroupState(initial)
 
     Column(
-        modifier,
+        modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
-        state.content()
+        groupState.content()
     }
 }
 
 @Preview(showBackground = true, backgroundColor = 0xFFF0F0F0)
 @Composable
-fun PrimaryButtonPreview() {
+private fun PrimaryButtonPreview() {
     PtPtTheme {
         var last by rememberSaveable { mutableStateOf<String?>("A") }
-
-        val radioState = rememberRadioGroupState(initial = "A")
 
         Column(
             modifier = Modifier
@@ -57,16 +52,31 @@ fun PrimaryButtonPreview() {
         ) {
             Text(text = "마지막 선택: $last", color = Color.White)
 
-            RadioGroup(
-                state = radioState,
-                modifier = Modifier.fillMaxWidth(),
-                onChanged = { selected ->
-                    last = selected
-                },
-            ) {
-                RadioButton(value = "A", text = "Apple", modifier = Modifier.fillMaxWidth())
-                RadioButton(value = "B", text = "Banana", modifier = Modifier.fillMaxWidth())
-                RadioButton(value = "C", text = "Cherry", modifier = Modifier.fillMaxWidth())
+            RadioGroup(modifier = Modifier.fillMaxWidth()) {
+                RadioButton(
+                    modifier = Modifier.fillMaxWidth(),
+                    value = "A",
+                    text = "Apple",
+                    onSelect = {
+                        last = it
+                    },
+                )
+                RadioButton(
+                    modifier = Modifier.fillMaxWidth(),
+                    value = "B",
+                    text = "Banana",
+                    onSelect = {
+                        last = it
+                    },
+                )
+                RadioButton(
+                    modifier = Modifier.fillMaxWidth(),
+                    value = "C",
+                    text = "Cherry",
+                    onSelect = {
+                        last = it
+                    },
+                )
             }
         }
     }

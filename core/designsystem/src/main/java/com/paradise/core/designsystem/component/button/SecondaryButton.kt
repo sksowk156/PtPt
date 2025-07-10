@@ -45,7 +45,7 @@ fun SecondaryButton(
 @OptIn(ExperimentalLayoutApi::class)
 @Preview(showBackground = true, backgroundColor = 0xFFF0F0F0)
 @Composable
-fun SecondaryButtonPreview() {
+private fun SecondaryButtonPreview() {
     PtPtTheme {
         Column(
             modifier = Modifier
