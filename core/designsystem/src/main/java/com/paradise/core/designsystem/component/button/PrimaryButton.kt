@@ -43,7 +43,7 @@ fun PrimaryButton(
 @OptIn(ExperimentalLayoutApi::class)
 @Preview(showBackground = true, backgroundColor = 0xFFF0F0F0)
 @Composable
-fun PrimaryButtonPreview() {
+private fun PrimaryButtonPreview() {
     PtPtTheme {
         Column(
             modifier = Modifier

@@ -47,7 +47,7 @@ fun OutlinedButton(
 @OptIn(ExperimentalLayoutApi::class)
 @Preview(showBackground = true, backgroundColor = 0xFFF0F0F0)
 @Composable
-fun OutlinedButtonPreview() {
+private fun OutlinedButtonPreview() {
     PtPtTheme {
         Column(
             modifier = Modifier
