@@ -1,4 +1,4 @@
-package com.paradise.core.ui.radiogroup.scope
+package com.paradise.core.designsystem.component.radiogroup.scope
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable

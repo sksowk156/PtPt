@@ -1,4 +1,4 @@
-package com.paradise.core.ui.radiogroup
+package com.paradise.core.designsystem.component.radiogroup
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -16,10 +16,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.paradise.core.designsystem.component.radiogroup.item.RadioOutlinedButton
+import com.paradise.core.designsystem.component.radiogroup.scope.RadioGroupScope
+import com.paradise.core.designsystem.component.radiogroup.scope.rememberRadioGroupState
 import com.paradise.core.designsystem.theme.PtPtTheme
-import com.paradise.core.ui.radiogroup.item.RadioButton
-import com.paradise.core.ui.radiogroup.scope.RadioGroupScope
-import com.paradise.core.ui.radiogroup.scope.rememberRadioGroupState
 
 @Composable
 fun <T> RadioGroupLayout(
@@ -53,7 +53,7 @@ private fun PrimaryButtonPreview() {
             Text(text = "마지막 선택: $last", color = Color.White)
 
             RadioGroupLayout(modifier = Modifier.fillMaxWidth()) {
-                RadioButton(
+                RadioOutlinedButton(
                     modifier = Modifier.fillMaxWidth(),
                     value = "A",
                     text = "Apple",
@@ -61,7 +61,7 @@ private fun PrimaryButtonPreview() {
                         last = it
                     },
                 )
-                RadioButton(
+                RadioOutlinedButton(
                     modifier = Modifier.fillMaxWidth(),
                     value = "B",
                     text = "Banana",
@@ -69,7 +69,7 @@ private fun PrimaryButtonPreview() {
                         last = it
                     },
                 )
-                RadioButton(
+                RadioOutlinedButton(
                     modifier = Modifier.fillMaxWidth(),
                     value = "C",
                     text = "Cherry",
