@@ -1,9 +1,11 @@
 package com.paradise.core.ui.dialog
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -11,56 +13,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.paradise.core.designsystem.theme.PtPtTheme
-import com.paradise.core.ui.dialog.scope.ConfirmRadioGroup
+import com.paradise.core.ui.dialog.item.ConfirmRadioGroup
+import com.paradise.core.ui.dialog.item.HorizontalSelectButton
 import com.paradise.core.ui.dialog.scope.DialogScope
-import com.paradise.core.ui.dialog.scope.HorizontalSelectButton
 import com.paradise.core.ui.dialog.scope.rememberDialogState
-
-// @Composable
-// fun BaseDialog(
-//    title: String,
-//    onConfirm: () -> Unit,
-//    onDismiss: () -> Unit,
-// ) {
-//    Dialog(onDismissRequest = onDismiss) {
-//        Surface(
-//            shape = PtPtTheme.shape.xl,
-//            color = PtPtTheme.color.textBlack,
-//        ) {
-//            Column(
-//                modifier = Modifier
-//                    .padding(24.dp)
-//                    .fillMaxWidth(),
-//                horizontalAlignment = Alignment.CenterHorizontally,
-//            ) {
-//                Text(
-//                    text = title,
-//                    style = PtPtTheme.typography.title02,
-//                    color = PtPtTheme.color.textStrong,
-//                )
-//
-//                Spacer(modifier = Modifier.height(24.dp))
-//
-//                Row(
-//                    modifier = Modifier.fillMaxWidth(),
-//                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-//                ) {
-//                    SecondaryButton(
-//                        modifier = Modifier.weight(1f),
-//                        text = "취소",
-//                        onClick = onDismiss,
-//                    )
-//
-//                    PrimaryButton(
-//                        modifier = Modifier.weight(1f),
-//                        text = "네",
-//                        onClick = onConfirm,
-//                    )
-//                }
-//            }
-//        }
-//    }
-// }
 
 @Composable
 fun <T> DialogLayout(
@@ -89,18 +45,15 @@ fun <T> DialogLayout(
 
 @Preview(showBackground = true, backgroundColor = 0xFFFFFFFF)
 @Composable
-fun BaseDialogPreview() {
+private fun DialogLayoutPreview() {
     PtPtTheme {
-//        BaseDialog(
-//            title = "로그아웃 하시겠습니까?",
-//            onConfirm = { },
-//            onDismiss = { },
-//        )
-
         DialogLayout(
             onDismiss = {},
             modifier = Modifier,
         ) {
+            Row {
+                Text("dfd")
+            }
             ConfirmRadioGroup(
                 initial = null,
                 values = listOf("사과", "바나나", "딸기"),
@@ -109,9 +62,34 @@ fun BaseDialogPreview() {
 
             HorizontalSelectButton(
                 modifier = Modifier.padding(top = 10.dp),
+                dismissText = "취소",
+                confirmText = "네",
                 onDismiss = {},
                 onConfirm = { result ->
                 },
+            )
+        }
+    }
+}
+
+@Preview(showBackground = true, backgroundColor = 0xFFFFFFFF)
+@Composable
+private fun DialogLayoutPreview2() {
+    PtPtTheme {
+        DialogLayout(
+            onDismiss = {},
+            modifier = Modifier,
+        ) {
+            Row {
+                Text("dfd")
+            }
+
+            HorizontalSelectButton(
+                modifier = Modifier.padding(top = 10.dp),
+                dismissText = "취소",
+                confirmText = "네",
+                onDismiss = {},
+                onConfirm = {},
             )
         }
     }
