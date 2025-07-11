@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -15,7 +16,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.paradise.core.designsystem.component.button.OutlinedButton
 import com.paradise.core.designsystem.component.button.base.BaseButton
-import com.paradise.core.designsystem.component.icon.PtPtIcon
 import com.paradise.core.designsystem.component.radiogroup.scope.RadioGroupScope
 import com.paradise.core.designsystem.component.radiogroup.scope.rememberRadioGroupState
 import com.paradise.core.designsystem.theme.PtPtTheme
@@ -68,9 +68,10 @@ fun <T> RadioGroupScope<T>.RadioCheckButton(
         )
 
         if (this@RadioCheckButton.selectedOption == value) {
-            PtPtIcon(
+            Icon(
                 imageVector = PtPtTheme.icon.checkFill,
                 tint = PtPtTheme.color.primaryNormal,
+                contentDescription = PtPtTheme.icon.checkFill.name,
             )
         }
     }

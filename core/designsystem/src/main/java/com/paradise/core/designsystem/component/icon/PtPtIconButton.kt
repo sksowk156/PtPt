@@ -1,6 +1,7 @@
 package com.paradise.core.designsystem.component.icon
 
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -21,7 +22,7 @@ fun PtPtIconButton(
         enabled = enabled,
         modifier = modifier.size(width = imageVector.defaultWidth, height = imageVector.defaultHeight),
     ) {
-        PtPtIcon(
+        Icon(
             imageVector = imageVector,
             tint = tint,
             contentDescription = contentDescription,
