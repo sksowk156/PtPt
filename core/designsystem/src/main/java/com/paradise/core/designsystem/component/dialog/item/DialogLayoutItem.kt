@@ -1,4 +1,4 @@
-package com.paradise.core.ui.dialog.item
+package com.paradise.core.designsystem.component.dialog.item
 
 import PrimaryButton
 import androidx.compose.foundation.layout.Arrangement
@@ -12,9 +12,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.paradise.core.designsystem.component.button.SecondaryButton
-import com.paradise.core.ui.dialog.scope.DialogScope
-import com.paradise.core.ui.radiogroup.RadioGroupLayout
-import com.paradise.core.ui.radiogroup.item.RadioButton
+import com.paradise.core.designsystem.component.dialog.scope.DialogScope
+import com.paradise.core.designsystem.component.radiogroup.RadioGroupLayout
+import com.paradise.core.designsystem.component.radiogroup.item.RadioOutlinedButton
 
 @Composable
 fun <T> DialogScope<T>.HorizontalSelectButton(
@@ -90,7 +90,7 @@ fun <T> DialogScope<T>.ConfirmRadioGroup(
 
     RadioGroupLayout(modifier = modifier.fillMaxWidth()) {
         values.forEach { value ->
-            RadioButton(
+            RadioOutlinedButton(
                 modifier = Modifier.fillMaxWidth(),
                 value = value,
                 text = value.toString(),

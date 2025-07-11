@@ -1,4 +1,4 @@
-package com.paradise.core.ui.dialog
+package com.paradise.core.designsystem.component.dialog
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -12,11 +12,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import com.paradise.core.designsystem.component.dialog.item.ConfirmRadioGroup
+import com.paradise.core.designsystem.component.dialog.item.HorizontalSelectButton
+import com.paradise.core.designsystem.component.dialog.scope.DialogScope
+import com.paradise.core.designsystem.component.dialog.scope.rememberDialogState
 import com.paradise.core.designsystem.theme.PtPtTheme
-import com.paradise.core.ui.dialog.item.ConfirmRadioGroup
-import com.paradise.core.ui.dialog.item.HorizontalSelectButton
-import com.paradise.core.ui.dialog.scope.DialogScope
-import com.paradise.core.ui.dialog.scope.rememberDialogState
 
 @Composable
 fun <T> DialogLayout(

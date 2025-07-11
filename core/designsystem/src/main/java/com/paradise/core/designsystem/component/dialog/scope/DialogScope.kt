@@ -1,4 +1,4 @@
-package com.paradise.core.ui.dialog.scope
+package com.paradise.core.designsystem.component.dialog.scope
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
