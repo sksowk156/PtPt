@@ -1,10 +1,11 @@
-package com.paradise.core.designsystem.component.textfield
+package com.paradise.core.designsystem.component.textfield.base
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.layout.Arrangement
@@ -104,6 +105,7 @@ fun BaseTextField(
     visualTransformation: VisualTransformation = VisualTransformation.None,
     leadingIcon: @Composable (() -> Unit)? = null,
     trailingIcon: @Composable (() -> Unit)? = null,
+    onTrailingIconClick: (() -> Unit)? = null,
     helperText: String? = null,
     helperTextType: BaseTextField.HelperTextType = BaseTextField.HelperTextType.None,
 ) {
@@ -202,7 +204,15 @@ fun BaseTextField(
                             )
                         } else if (trailingIcon != null) {
                             Spacer(modifier = Modifier.width(12.dp))
-                            Box(modifier = Modifier.size(24.dp)) {
+                            Box(
+                                modifier = Modifier
+                                    .size(24.dp)
+                                    .clickable {
+                                        if (onTrailingIconClick != null) {
+                                            onTrailingIconClick()
+                                        }
+                                    },
+                            ) {
                                 trailingIcon()
                             }
                         }
@@ -234,116 +244,6 @@ fun BaseTextField(
     }
 }
 
-@Composable
-fun DefaultTextField(
-    value: String,
-    onValueChange: (String) -> Unit,
-    modifier: Modifier = Modifier,
-    placeholder: String = "",
-    enabled: Boolean = true,
-    readOnly: Boolean = false,
-    singleLine: Boolean = true,
-    maxLines: Int = 1,
-    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
-    keyboardActions: KeyboardActions = KeyboardActions.Default,
-    visualTransformation: VisualTransformation = VisualTransformation.None,
-    leadingIcon: @Composable (() -> Unit)? = null,
-    trailingIcon: @Composable (() -> Unit)? = null,
-) {
-    BaseTextField(
-        value = value,
-        onValueChange = onValueChange,
-        modifier = modifier,
-        placeholder = placeholder,
-        style = BaseTextField.DefaultStyle,
-        enabled = enabled,
-        readOnly = readOnly,
-        singleLine = singleLine,
-        maxLines = maxLines,
-        keyboardOptions = keyboardOptions,
-        keyboardActions = keyboardActions,
-        visualTransformation = visualTransformation,
-        leadingIcon = leadingIcon,
-        trailingIcon = trailingIcon,
-    )
-}
-
-// TODO : 삭제 예정
-@Composable
-fun ErrorTextField(
-    value: String,
-    onValueChange: (String) -> Unit,
-    errorMessage: String,
-    modifier: Modifier = Modifier,
-    placeholder: String = "",
-    enabled: Boolean = true,
-    readOnly: Boolean = false,
-    singleLine: Boolean = true,
-    maxLines: Int = 1,
-    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
-    keyboardActions: KeyboardActions = KeyboardActions.Default,
-    visualTransformation: VisualTransformation = VisualTransformation.None,
-    leadingIcon: @Composable (() -> Unit)? = null,
-    trailingIcon: @Composable (() -> Unit)? = null,
-) {
-    BaseTextField(
-        value = value,
-        onValueChange = onValueChange,
-        modifier = modifier,
-        placeholder = placeholder,
-        style = BaseTextField.DefaultStyle,
-        enabled = enabled,
-        readOnly = readOnly,
-        singleLine = singleLine,
-        maxLines = maxLines,
-        keyboardOptions = keyboardOptions,
-        keyboardActions = keyboardActions,
-        visualTransformation = visualTransformation,
-        leadingIcon = leadingIcon,
-        trailingIcon = trailingIcon,
-        helperText = errorMessage,
-        helperTextType = BaseTextField.HelperTextType.Error,
-    )
-}
-
-// TODO : 삭제 예정
-@Composable
-fun SuccessTextField(
-    value: String,
-    onValueChange: (String) -> Unit,
-    successMessage: String,
-    modifier: Modifier = Modifier,
-    placeholder: String = "",
-    enabled: Boolean = true,
-    readOnly: Boolean = false,
-    singleLine: Boolean = true,
-    maxLines: Int = 1,
-    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
-    keyboardActions: KeyboardActions = KeyboardActions.Default,
-    visualTransformation: VisualTransformation = VisualTransformation.None,
-    leadingIcon: @Composable (() -> Unit)? = null,
-    trailingIcon: @Composable (() -> Unit)? = null,
-) {
-    BaseTextField(
-        value = value,
-        onValueChange = onValueChange,
-        modifier = modifier,
-        placeholder = placeholder,
-        style = BaseTextField.DefaultStyle,
-        enabled = enabled,
-        readOnly = readOnly,
-        singleLine = singleLine,
-        maxLines = maxLines,
-        keyboardOptions = keyboardOptions,
-        keyboardActions = keyboardActions,
-        visualTransformation = visualTransformation,
-        leadingIcon = leadingIcon,
-        trailingIcon = trailingIcon,
-        helperText = successMessage,
-        helperTextType = BaseTextField.HelperTextType.Success,
-    )
-}
-
 @Preview(showBackground = true)
 @Composable
 private fun BaseTextFieldPreview() {
@@ -354,35 +254,6 @@ private fun BaseTextFieldPreview() {
                 .background(PtPtTheme.color.backgroundNormal),
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
-            // Default
-            DefaultTextField(
-                value = "",
-                onValueChange = {},
-                placeholder = "입력하세요.",
-            )
-
-            // On Focus / On Typing
-            DefaultTextField(
-                value = "입력했어요!",
-                onValueChange = {},
-                placeholder = "입력하세요.",
-            )
-
-            // Success
-            SuccessTextField(
-                value = "입력했어요",
-                onValueChange = {},
-                successMessage = "입력가능한 값입니다",
-                placeholder = "입력하세요.",
-            )
-
-            // Error
-            ErrorTextField(
-                value = "입력했어요",
-                onValueChange = {},
-                errorMessage = "오류 관련 스크립트 입니다.",
-                placeholder = "입력하세요.",
-            )
         }
     }
 }
