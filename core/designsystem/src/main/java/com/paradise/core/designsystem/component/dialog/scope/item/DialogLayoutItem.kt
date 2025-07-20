@@ -1,4 +1,4 @@
-package com.paradise.core.designsystem.component.dialog.item
+package com.paradise.core.designsystem.component.dialog.scope.item
 
 import PrimaryButton
 import androidx.compose.foundation.layout.Arrangement
@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.dp
 import com.paradise.core.designsystem.component.button.SecondaryButton
 import com.paradise.core.designsystem.component.dialog.scope.DialogScope
 import com.paradise.core.designsystem.component.radiogroup.RadioGroupLayout
-import com.paradise.core.designsystem.component.radiogroup.item.RadioOutlinedButton
+import com.paradise.core.designsystem.component.radiogroup.scope.item.RadioOutlinedButton
 
 @Composable
 fun <T> DialogScope<T>.HorizontalSelectButton(

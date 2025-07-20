@@ -16,8 +16,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.paradise.core.designsystem.component.radiogroup.item.RadioOutlinedButton
 import com.paradise.core.designsystem.component.radiogroup.scope.RadioGroupScope
+import com.paradise.core.designsystem.component.radiogroup.scope.item.RadioOutlinedButton
 import com.paradise.core.designsystem.component.radiogroup.scope.rememberRadioGroupState
 import com.paradise.core.designsystem.theme.PtPtTheme
 

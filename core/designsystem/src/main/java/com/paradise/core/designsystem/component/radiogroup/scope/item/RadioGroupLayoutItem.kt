@@ -1,4 +1,4 @@
-package com.paradise.core.designsystem.component.radiogroup.item
+package com.paradise.core.designsystem.component.radiogroup.scope.item
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
