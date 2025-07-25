@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="bottom_nav_destination_title_home">홈</string>
+    <string name="bottom_nav_destination_title_record">기록</string>
+    <string name="bottom_nav_destination_title_my">마이</string>
+</resources>
