@@ -23,7 +23,7 @@ fun PtPtTheme(
     icon: PtPtIcon = PtPtTheme.icon,
     content: @Composable () -> Unit,
 ) {
-    val color = if (darkTheme) ptptLightColorScheme else ptptDarkColorScheme
+    val color = if (darkTheme) ptptDarkColorScheme else ptptLightColorScheme
 
     CompositionLocalProvider(
         LocalTypography provides typography,
