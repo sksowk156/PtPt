@@ -29,7 +29,7 @@ fun <T> DialogLayout(
     Dialog(onDismissRequest = onDismiss) {
         Surface(
             shape = PtPtTheme.shape.xl,
-            color = PtPtTheme.color.textBlack,
+            color = PtPtTheme.color.backgroundElevated,
         ) {
             Column(
                 modifier = modifier
