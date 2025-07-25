@@ -37,7 +37,7 @@ object BaseTopAppBar {
 
         override val containerColor @Composable get() = themeColors.backgroundNormal
         override val contentColor @Composable get() = themeColors.textStrong
-        override val dividerColor @Composable get() = themeColors.textNormal
+        override val dividerColor @Composable get() = themeColors.lineNeutral
     }
 
     enum class Size(
@@ -68,10 +68,9 @@ fun BaseTopAppBar(
         contentColor = style.contentColor,
     ) {
         Column(modifier = Modifier.fillMaxSize()) {
-            // ① TopBarLayout을 weight로 채우고
             BaseTopAppBarLayout(
                 modifier = Modifier
-                    .weight(1f) // 남는 전체 높이 차지
+                    .weight(1f)
                     .fillMaxWidth(),
                 horizontalPadding = size.horizontalPadding,
                 leftSlot = leftSlot,
@@ -79,7 +78,7 @@ fun BaseTopAppBar(
                 rightSlot = rightSlot,
                 defaultTitleTextStyle = size.titleTextStyle(PtPtTheme.typography),
             )
-            // ② Divider는 Column의 마지막 Item → 항상 맨 아래
+
             HorizontalDivider(
                 thickness = 1.dp,
                 color = style.dividerColor,
@@ -111,7 +110,6 @@ private fun BaseTopAppBarLayout(
     Layout(
         modifier = modifier,
         content = {
-            // ① 세 슬롯을 layoutId로 구분해 삽입
             if (leftSlot != null) {
                 Row(modifier = Modifier.layoutId("LEFT")) {
                     leftSlot()
@@ -132,13 +130,8 @@ private fun BaseTopAppBarLayout(
             }
         },
     ) { measurables, constraints ->
-
-        // ────────── 1. 각 자식 측정 ──────────
-
-        // minWidth / minHeight를 0으로 하여 "제한 없는" 측정 사양
         val looseConstraints = constraints.copy(minWidth = 0, minHeight = 0)
 
-        // 왼쪽·오른쪽 먼저 폭을 확정
         val leftPlaceable = measurables
             .firstOrNull { it.layoutId == "LEFT" }
             ?.measure(looseConstraints)
@@ -147,7 +140,6 @@ private fun BaseTopAppBarLayout(
             .firstOrNull { it.layoutId == "RIGHT" }
             ?.measure(looseConstraints)
 
-        // 가운데는 '남는 가로 공간'(barWidth - 좌우 폭) 안에서만 측정
         val leftPlaceableWidth = leftPlaceable?.width ?: 0
         val rightPlaceableWidth = rightPlaceable?.width ?: 0
         val maxCenterWidth = (constraints.maxWidth - leftPlaceableWidth - rightPlaceableWidth)
@@ -157,40 +149,32 @@ private fun BaseTopAppBarLayout(
             .firstOrNull { it.layoutId == "CENTER" }
             ?.measure(looseConstraints.copy(maxWidth = maxCenterWidth))
 
-        // ────────── 2. 레이아웃 크기 결정 ──────────
         val totalBarWidth = constraints.maxWidth
         val totalBarHeight = constraints.maxHeight
 
         layout(width = totalBarWidth, height = totalBarHeight) {
-            // 세로 가운데 정렬 헬퍼
             fun calculateVerticalCenterPosition(childPlaceable: Placeable?): Int {
                 val childHeight = childPlaceable?.height ?: 0
                 return (totalBarHeight - childHeight) / 2
             }
 
-            // ─ Left slot ─
             leftPlaceable?.placeRelative(
                 x = horizontalPadding.roundToPx(),
                 y = calculateVerticalCenterPosition(leftPlaceable),
             )
 
-            // ─ Right slot ─
             rightPlaceable?.placeRelative(
                 x = totalBarWidth - horizontalPadding.roundToPx() - rightPlaceable.width,
                 y = calculateVerticalCenterPosition(rightPlaceable),
             )
 
-            // ─ Center slot ─
             centerPlaceable?.let { centerPlaceableItem ->
-                // 1) 이상적인 중앙 위치
                 var centerXPosition = (totalBarWidth - centerPlaceableItem.width) / 2
 
-                // 2) 좌·우 겹침 방지를 위한 최소 / 최대 X
                 val minimumCenterX = leftPlaceableWidth + horizontalPadding.roundToPx()
                 val maximumCenterX = totalBarWidth - rightPlaceableWidth -
                     horizontalPadding.roundToPx() - centerPlaceableItem.width
 
-                // 3) clamp
                 centerXPosition = centerXPosition.coerceIn(minimumCenterX, maximumCenterX)
 
                 centerPlaceableItem.placeRelative(
