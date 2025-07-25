@@ -15,11 +15,11 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            val bottomNavState = rememberAppNavState()
+            val appNavState = rememberAppNavState()
 
             PtPtTheme {
                 PtPtApp(
-                    bottomNavState = bottomNavState,
+                    appNavState = appNavState,
                 )
             }
         }

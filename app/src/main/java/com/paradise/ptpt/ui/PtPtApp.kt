@@ -9,22 +9,22 @@ import com.paradise.ptpt.ui.component.BottomNavBar
 
 @Composable
 fun PtPtApp(
-    bottomNavState: AppNavState,
+    appNavState: AppNavState,
     modifier: Modifier = Modifier,
 ) {
     Scaffold(
         modifier = modifier,
         bottomBar = {
             BottomNavBar(
-                currentDestination = bottomNavState.currentDestination,
+                currentDestination = appNavState.currentDestination,
                 navigateToDestination = {
-                    bottomNavState.navigateToDestination(it)
+                    appNavState.navigateToDestination(it)
                 },
             )
         },
     ) { innerPadding ->
         AppNavHost(
-            appNavState = bottomNavState,
+            appNavState = appNavState,
             modifier = Modifier.padding(innerPadding),
         )
     }
