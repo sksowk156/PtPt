@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.PtPt" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.PtPt" parent="android:Theme.Material.Light.NoActionBar">
+
+    </style>
+
+    <style name="Theme.PtPt.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/splash_background</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_ptpt_splash_logo</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="postSplashScreenTheme">@style/Theme.PtPt</item>
+    </style>
 </resources>

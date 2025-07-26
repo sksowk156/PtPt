@@ -1,5 +1,6 @@
 [versions]
 #
+coreSplashscreen = "1.0.1"
 projectApplicationId = "com.paradise.ptpt"
 projectVersionCode = "1"
 projectVersionName = "0.0.1"
@@ -51,6 +52,7 @@ paging = "3.3.6"
 # build-logic
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
 android-tools-common = { group = "com.android.tools", name = "common", version.ref = "androidTools" }
+androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashscreen" }
 androidx-paging-runtime = { module = "androidx.paging:paging-runtime", version.ref = "paging" }
 androidx-paging-compose = { module = "androidx.paging:paging-compose", version.ref = "paging" }
 androidx-paging-common = { module = "androidx.paging:paging-common", version.ref = "paging" }
