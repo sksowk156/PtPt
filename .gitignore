@@ -1,15 +1,40 @@
-*.iml
-.gradle
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
-.DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
+#########################
+# Android build outputs
+#########################
+*.apk
+*.aab
+*.aar
+*.ap_
+*.dex
+*.class
+
+build/
+*/build/
+
+#########################
+# Gradle & IDE
+#########################
+.gradle/
 local.properties
+
+# JetBrains/Android Studio
+.idea/
+*.iml
+
+#########################
+# 기타
+#########################
+proguard/
+.navigation/
+captures/
+.externalNativeBuild/
+.cxx/
+google-services.json
+signing.properties
+*.jks
+*.keystore
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
