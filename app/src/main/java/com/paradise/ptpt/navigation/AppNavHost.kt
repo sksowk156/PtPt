@@ -8,8 +8,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.createGraph
 import com.paradise.core.ui.route.Route
 import com.paradise.feature.auth.navigation.authScreen
+import com.paradise.feature.circuit.navigation.circuitScreen
 import com.paradise.feature.home.navigation.homeScreen
-import com.paradise.feature.matching.navigation.matchingScreen
 import com.paradise.feature.my.navigation.myScreen
 import com.paradise.feature.record.navigation.recordScreen
 import com.paradise.feature.tracking.navigation.trackingScreen
@@ -31,8 +31,17 @@ fun AppNavHost(
     val navGraph = remember(startDest) {
         navController.createGraph(startDestination = startDest) {
             authScreen()
-            homeScreen()
-            matchingScreen()
+            homeScreen(
+                onCircuitTrainigClick = {
+                    appNavState.navigateToRoute(
+                        route = Route.Circuit,
+                        clearToStart = false,
+                        launchSingleTop = true,
+                    )
+                },
+                onTrackingClick = {},
+            )
+            circuitScreen()
             trackingScreen()
             myScreen()
             recordScreen()

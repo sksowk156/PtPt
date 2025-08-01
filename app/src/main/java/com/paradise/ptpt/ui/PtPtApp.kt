@@ -21,7 +21,7 @@ fun PtPtApp(
                 BottomNavBar(
                     currentDestination = appNavState.currentDestination,
                     navigateToDestination = {
-                        appNavState.navigateToDestination(it)
+                        appNavState.navigateToBottomDestination(it)
                     },
                 )
             }

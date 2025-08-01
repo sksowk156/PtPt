@@ -57,21 +57,52 @@ class AppNavState(
             }
         }
 
-    // 하단 네비게이션 이동
-    fun navigateToDestination(bottomNavDestination: BottomNavDestination) {
-        val options = navOptions {
+    private fun buildOptions(
+        clearToStart: Boolean = false,
+        inclusive: Boolean = false,
+        launchSingleTop: Boolean = true,
+        keepState: Boolean = clearToStart,
+    ) = navOptions {
+        if (clearToStart) {
             popUpTo(navController.graph.findStartDestination().id) {
-                saveState = true
+                this.inclusive = inclusive
+                saveState = keepState
             }
-            launchSingleTop = true
-            restoreState = true
+            restoreState = keepState
+        }
+        this.launchSingleTop = launchSingleTop
+    }
+
+    fun navigateToRoute(
+        route: Route,
+        clearToStart: Boolean = false,
+        inclusive: Boolean = false,
+        launchSingleTop: Boolean = true,
+    ) {
+        navController.navigate(
+            route,
+            buildOptions(
+                clearToStart = clearToStart,
+                inclusive = inclusive,
+                launchSingleTop = launchSingleTop,
+                keepState = clearToStart,
+            ),
+        )
+    }
+
+    fun navigateToBottomDestination(destination: BottomNavDestination) {
+        val route = when (destination) {
+            BottomNavDestination.HOME -> Route.Home
+            BottomNavDestination.RECORD -> Route.Record
+            BottomNavDestination.MY -> Route.My
         }
 
-        when (bottomNavDestination) {
-            BottomNavDestination.HOME -> navController.navigate(Route.Home, options)
-            BottomNavDestination.RECORD -> navController.navigate(Route.Record, options)
-            BottomNavDestination.MY -> navController.navigate(Route.My, options)
-        }
+        navigateToRoute(
+            route = route,
+            clearToStart = true,
+            inclusive = false,
+            launchSingleTop = true,
+        )
     }
 
     // 뒤로가기

@@ -12,7 +12,7 @@ sealed interface Route {
     data object Home : Route
 
     @Serializable
-    data object Matching : Route
+    data object Circuit : Route
 
     @Serializable
     data object My : Route
