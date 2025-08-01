@@ -28,13 +28,12 @@ android {
 dependencies {
     implementation(projects.feature.auth)
     implementation(projects.feature.home)
-    implementation(projects.feature.matching)
+    implementation(projects.feature.circuit)
     implementation(projects.feature.my)
     implementation(projects.feature.record)
     implementation(projects.feature.tracking)
 
     implementation(projects.core.designsystem)
-//    implementation(projects.core.sideeffect)
     implementation(projects.core.data)
     implementation(projects.core.model)
     implementation(projects.core.ui)

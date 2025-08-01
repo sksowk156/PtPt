@@ -1,4 +1,4 @@
-package com.paradise.feature.matching
+package com.paradise.feature.circuit
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -8,7 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 
 @Composable
-internal fun MatchingRoute() {
+internal fun CircuitRoute() {
     Column(
         modifier = Modifier
             .fillMaxSize()

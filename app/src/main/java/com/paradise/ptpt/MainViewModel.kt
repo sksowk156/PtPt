@@ -19,7 +19,7 @@ class MainViewModel @Inject constructor() : ViewModel() {
     private val _state: MutableStateFlow<AppState> = MutableStateFlow(AppState())
     val state: StateFlow<AppState> = _state
         .onStart {
-            moveToAuthTempMethod()
+            moveToHomeTempMethod()
         }
         .stateIn(
             scope = viewModelScope,
