@@ -12,17 +12,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.paradise.core.designsystem.theme.PtPtTheme
-import com.paradise.core.model.DrillMovement
+import com.paradise.core.model.Movement
 
 @Composable
-fun DrillMovementItem(
-    drillMovement: DrillMovement,
+fun MovementItem(
+    movement: Movement,
     modifier: Modifier = Modifier,
-    content: @Composable DrillMovementScope.() -> Unit,
+    content: @Composable MovementScope.() -> Unit,
 ) {
-    val scope = remember(drillMovement) {
-        object : DrillMovementScope {
-            override val drillMovement: DrillMovement = drillMovement
+    val scope = remember(movement) {
+        object : MovementScope {
+            override val movement: Movement = movement
         }
     }
 
@@ -37,7 +37,7 @@ fun DrillMovementItem(
         ) {
             Text(
                 modifier = Modifier.weight(1f),
-                text = scope.drillMovement.name,
+                text = scope.movement.name,
                 style = PtPtTheme.typography.body04,
                 color = PtPtTheme.color.textNormal,
             )
@@ -48,12 +48,12 @@ fun DrillMovementItem(
 }
 
 @Stable
-interface DrillMovementScope {
-    val drillMovement: DrillMovement
+interface MovementScope {
+    val movement: Movement
 }
 
 @Composable
-fun DrillMovementScope.StepCount(modifier: Modifier = Modifier) {
+fun MovementScope.StepCount(modifier: Modifier = Modifier) {
     Row(modifier = modifier) {
         Text(
             modifier = Modifier.padding(end = 8.dp),
@@ -63,7 +63,7 @@ fun DrillMovementScope.StepCount(modifier: Modifier = Modifier) {
         )
 
         Text(
-            text = this@StepCount.drillMovement.stepCount.toString(),
+            text = this@StepCount.movement.stepCount.toString(),
             style = PtPtTheme.typography.body03,
             color = PtPtTheme.color.primaryNormal,
         )
@@ -72,14 +72,14 @@ fun DrillMovementScope.StepCount(modifier: Modifier = Modifier) {
 
 @Preview(showBackground = true)
 @Composable
-fun DrillMovementItemPreview() {
+fun MovementItemPreview() {
     PtPtTheme { // 테마 래핑
-        val sampleDrillMovement = DrillMovement(
+        val sampleMovement = Movement(
             name = "푸시업",
             stepCount = 2,
         )
 
-        DrillMovementItem(drillMovement = sampleDrillMovement) {
+        MovementItem(movement = sampleMovement) {
             StepCount(
                 modifier = Modifier,
             )

@@ -1,6 +1,6 @@
 package com.paradise.core.model
 
-data class DrillMovement(
+data class Movement(
     val name: String,
     val stepCount: Int,
 )
