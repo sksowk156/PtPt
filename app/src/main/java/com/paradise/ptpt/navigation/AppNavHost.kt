@@ -5,6 +5,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.navigation
 import androidx.navigation.createGraph
 import com.paradise.core.ui.route.Route
 import com.paradise.feature.auth.navigation.authScreen
@@ -25,24 +26,25 @@ fun AppNavHost(
     val navController = appNavState.navController
 
     val startDest = remember(authState) {
-        if (authState == AppState.AuthState.Unauthenticated) Route.Auth else Route.Home
+        if (authState == AppState.AuthState.Unauthenticated) Route.Auth else Route.HomeBase
     }
 
     val navGraph = remember(startDest) {
         navController.createGraph(startDestination = startDest) {
+            navigation<Route.HomeBase>(startDestination = Route.Home) {
+                homeScreen(
+                    onCircuitTrainigClick = {
+                        appNavState.navigateToRoute(route = Route.Circuit)
+                    },
+                    onTrackingClick = {
+                        appNavState.navigateToRoute(route = Route.Tracking)
+                    },
+                )
+                circuitScreen()
+                trackingScreen()
+            }
+
             authScreen()
-            homeScreen(
-                onCircuitTrainigClick = {
-                    appNavState.navigateToRoute(
-                        route = Route.Circuit,
-                        clearToStart = false,
-                        launchSingleTop = true,
-                    )
-                },
-                onTrackingClick = {},
-            )
-            circuitScreen()
-            trackingScreen()
             myScreen()
             recordScreen()
         }

@@ -18,7 +18,7 @@ enum class BottomNavDestination(
         unSelectedImageVector = R.drawable.ic_home_off,
         contentDescription = "홈 화면",
         title = R.string.bottom_nav_destination_title_home,
-        route = Route.Home::class,
+        route = Route.HomeBase::class,
     ),
     RECORD(
         selectdImageVector = R.drawable.ic_calendar_on,
