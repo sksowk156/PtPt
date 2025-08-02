@@ -46,7 +46,7 @@ object BaseTopAppBar {
         val titleTextStyle: (PtPtTypography) -> TextStyle,
     ) {
         Default(
-            height = 64.dp,
+            height = 65.dp,
             horizontalPadding = 20.dp,
             titleTextStyle = { typography -> typography.title02 },
         ),

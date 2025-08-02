@@ -72,7 +72,7 @@ fun MovementScope.StepCount(modifier: Modifier = Modifier) {
 
 @Preview(showBackground = true)
 @Composable
-fun MovementItemPreview() {
+private fun MovementItemPreview() {
     PtPtTheme { // 테마 래핑
         val sampleMovement = Movement(
             name = "푸시업",
@@ -80,9 +80,7 @@ fun MovementItemPreview() {
         )
 
         MovementItem(movement = sampleMovement) {
-            StepCount(
-                modifier = Modifier,
-            )
+            StepCount(modifier = Modifier)
         }
     }
 }

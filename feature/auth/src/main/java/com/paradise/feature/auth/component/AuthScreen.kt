@@ -195,7 +195,7 @@ private class AuthScreenStateProvider : PreviewParameterProvider<AuthScreenState
 // 기본 Preview
 @Preview(name = "Auth Screen - Default")
 @Composable
-fun AuthScreenPreview() {
+private fun AuthScreenPreview() {
     AuthScreen(
         onLoginClick = {},
     )
@@ -203,7 +203,7 @@ fun AuthScreenPreview() {
 
 @Preview(name = "Auth Screen - States", showBackground = true)
 @Composable
-fun AuthScreenStatesPreview(
+private fun AuthScreenStatesPreview(
     @PreviewParameter(AuthScreenStateProvider::class)
     stateHolder: AuthScreenStateHolder,
 ) {
@@ -219,7 +219,7 @@ fun AuthScreenStatesPreview(
     uiMode = Configuration.UI_MODE_NIGHT_YES,
 )
 @Composable
-fun AuthScreenDarkPreview() {
+private fun AuthScreenDarkPreview() {
     AuthScreen(
         screenStateHolder = PreviewAuthScreenStateHolder(
             logoOffset = -100f,
@@ -235,7 +235,7 @@ fun AuthScreenDarkPreview() {
     device = "spec:width=320dp,height=640dp,dpi=160",
 )
 @Composable
-fun AuthScreenSmallPreview() {
+private fun AuthScreenSmallPreview() {
     AuthScreen(
         screenStateHolder = PreviewAuthScreenStateHolder(
             logoOffset = -80f,
@@ -251,7 +251,7 @@ fun AuthScreenSmallPreview() {
     device = "spec:width=800dp,height=1280dp,dpi=240",
 )
 @Composable
-fun AuthScreenTabletPreview() {
+private fun AuthScreenTabletPreview() {
     AuthScreen(
         screenStateHolder = PreviewAuthScreenStateHolder(
             logoOffset = -150f,
@@ -264,7 +264,7 @@ fun AuthScreenTabletPreview() {
 // Interactive Preview (Android Studio Electric Eel 이상)
 @Preview(name = "Auth Screen - Interactive")
 @Composable
-fun AuthScreenInteractivePreview() {
+private fun AuthScreenInteractivePreview() {
     var clickCount by remember { mutableIntStateOf(0) }
 
     Column {
@@ -287,7 +287,7 @@ fun AuthScreenInteractivePreview() {
 // 개별 컴포넌트 Preview
 @Preview(name = "Auth Logo")
 @Composable
-fun AuthLogoPreview() {
+private fun AuthLogoPreview() {
     Box(
         modifier = Modifier
             .size(200.dp)
@@ -302,7 +302,7 @@ fun AuthLogoPreview() {
 
 @Preview(name = "Login Button")
 @Composable
-fun LoginButtonPreview() {
+private fun LoginButtonPreview() {
     Box(
         modifier = Modifier
             .fillMaxWidth()
