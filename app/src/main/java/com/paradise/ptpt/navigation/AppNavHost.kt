@@ -34,13 +34,22 @@ fun AppNavHost(
             navigation<Route.HomeBase>(startDestination = Route.Home) {
                 homeScreen(
                     onCircuitTrainigClick = {
-                        appNavState.navigateToRoute(route = Route.Circuit)
+                        appNavState.navigateToRoute(route = Route.CircuitBase)
                     },
                     onTrackingClick = {
                         appNavState.navigateToRoute(route = Route.Tracking)
                     },
                 )
-                circuitScreen()
+                circuitScreen(
+                    onBackClick = {
+                        appNavState.navigateUp()
+                    },
+                    onCircuitAddClick = {
+                    },
+                    onCircuitCategoryClick = { category ->
+                        appNavState.navigateToRoute(route = Route.CircuitCategory(category))
+                    },
+                )
                 trackingScreen()
             }
 
