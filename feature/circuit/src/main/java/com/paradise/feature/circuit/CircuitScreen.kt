@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.paradise.core.designsystem.component.icon.PtPtIconButton
-import com.paradise.core.designsystem.component.topappbar.StartCenterTopAppBar
+import com.paradise.core.designsystem.component.topappbar.MainTopAppBar
 import com.paradise.core.designsystem.theme.PtPtTheme
 import com.paradise.core.model.Category
 import com.paradise.feature.circuit.component.CategoryCard
@@ -43,9 +43,9 @@ internal fun CircuitScreen(
             .fillMaxSize()
             .background(PtPtTheme.color.backgroundNormal),
     ) {
-        StartCenterTopAppBar(
+        MainTopAppBar(
             title = "무산소 운동",
-            leftSlot = {
+            leftContent = {
                 PtPtIconButton(
                     imageVector = PtPtTheme.icon.back,
                     tint = PtPtTheme.color.textNormal,

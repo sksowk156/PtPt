@@ -15,7 +15,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.paradise.core.designsystem.component.icon.PtPtIconButton
-import com.paradise.core.designsystem.component.topappbar.StartCenterEndTopAppBar
+import com.paradise.core.designsystem.component.topappbar.MainTopAppBar
 import com.paradise.core.designsystem.theme.PtPtTheme
 import com.paradise.core.model.Category
 import com.paradise.core.model.Movement
@@ -51,16 +51,16 @@ internal fun CircuitCategoryScreen(
             .fillMaxSize()
             .background(PtPtTheme.color.backgroundNormal),
     ) {
-        StartCenterEndTopAppBar(
+        MainTopAppBar(
             title = category.kor,
-            leftSlot = {
+            leftContent = {
                 PtPtIconButton(
                     imageVector = PtPtTheme.icon.back,
                     tint = PtPtTheme.color.textNormal,
                     onClick = onBackClick,
                 )
             },
-            rightSlot = {
+            rightContent = {
                 PtPtIconButton(
                     imageVector = PtPtTheme.icon.addSmall,
                     onClick = onAddClick,
