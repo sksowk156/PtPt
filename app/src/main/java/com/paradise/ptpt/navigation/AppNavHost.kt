@@ -45,9 +45,12 @@ fun AppNavHost(
                         appNavState.navigateUp()
                     },
                     onCircuitAddClick = {
+                        appNavState.navigateToRoute(route = Route.CircuitAdd)
                     },
                     onCircuitCategoryClick = { category ->
                         appNavState.navigateToRoute(route = Route.CircuitCategory(category))
+                    },
+                    onMovementCountSelected = {
                     },
                 )
                 trackingScreen()

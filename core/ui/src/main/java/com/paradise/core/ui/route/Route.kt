@@ -22,6 +22,9 @@ sealed interface Route {
     data object CircuitRoute : Route
 
     @Serializable
+    data object CircuitAdd : Route
+
+    @Serializable
     data class CircuitCategory(val category: Category) : Route
 
     @Serializable
