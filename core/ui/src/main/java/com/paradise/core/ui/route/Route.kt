@@ -10,10 +10,10 @@ sealed interface Route {
     data object Auth : Route
 
     @Serializable
-    data object HomeBase : Route
-
-    @Serializable
-    data object Home : Route
+    data object HomeBase : Route {
+        @Serializable
+        data object Home : Route
+    }
 
     @Serializable
     data object RoutineBase : Route {
@@ -21,10 +21,19 @@ sealed interface Route {
         data object RoutineRoute : Route
 
         @Serializable
-        data object RoutineAdd : Route
+        data class RoutineCategory(val category: Category) : Route
 
         @Serializable
-        data class RoutineCategory(val category: Category) : Route
+        data object RoutineAdd : Route {
+            @Serializable
+            data object Analyze : Route
+
+            @Serializable
+            data object Save : Route
+
+            @Serializable
+            data object Select : Route
+        }
     }
 
     @Serializable

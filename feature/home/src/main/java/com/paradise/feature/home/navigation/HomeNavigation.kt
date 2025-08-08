@@ -9,7 +9,7 @@ fun NavGraphBuilder.homeScreen(
     onRoutineClick: () -> Unit,
     onTrackingClick: () -> Unit,
 ) {
-    composable<Route.Home> {
+    composable<Route.HomeBase.Home> {
         HomeRoute(
             onRoutineClick = onRoutineClick,
             onTrackingClick = onTrackingClick,

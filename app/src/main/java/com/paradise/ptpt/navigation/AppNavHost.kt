@@ -31,7 +31,7 @@ fun AppNavHost(
 
     val navGraph = remember(startDest) {
         navController.createGraph(startDestination = startDest) {
-            navigation<Route.HomeBase>(startDestination = Route.Home) {
+            navigation<Route.HomeBase>(startDestination = Route.HomeBase.Home) {
                 homeScreen(
                     onRoutineClick = {
                         appNavState.navigateToRoute(route = Route.RoutineBase)
@@ -45,12 +45,16 @@ fun AppNavHost(
                         appNavState.navigateUp()
                     },
                     onRoutineAddClick = {
-                        appNavState.navigateToRoute(route = Route.RoutineBase.RoutineAdd)
+                        appNavState.navigateToRoute(route = Route.RoutineBase.RoutineAdd.Select)
                     },
                     onRoutineCategoryClick = { category ->
                         appNavState.navigateToRoute(route = Route.RoutineBase.RoutineCategory(category))
                     },
                     onPoseCountSelected = {
+                        appNavState.navigateToRoute(route = Route.RoutineBase.RoutineAdd.Analyze)
+                    },
+                    onRoutineAddCloseClick = {
+                        appNavState.popBackToRoute<Route.RoutineBase.RoutineCategory>()
                     },
                 )
                 trackingScreen()

@@ -13,7 +13,6 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
 import com.paradise.core.ui.route.Route
 import com.paradise.ptpt.navigation.BottomNavDestination
-import kotlin.reflect.KClass
 
 @Composable
 fun rememberAppNavState(navController: NavHostController = rememberNavController()): AppNavState {
@@ -80,7 +79,7 @@ class AppNavState(
         launchSingleTop: Boolean = true,
     ) {
         navController.navigate(
-            route,
+            route = route,
             buildOptions(
                 clearToStart = clearToStart,
                 inclusive = inclusive,
@@ -92,7 +91,7 @@ class AppNavState(
 
     fun navigateToBottomDestination(destination: BottomNavDestination) {
         val route = when (destination) {
-            BottomNavDestination.HOME -> Route.Home
+            BottomNavDestination.HOME -> Route.HomeBase.Home
             BottomNavDestination.RECORD -> Route.Record
             BottomNavDestination.MY -> Route.My
         }
@@ -111,13 +110,7 @@ class AppNavState(
     }
 
     // 특정 route로 pop back
-    fun popBackTo(
-        route: KClass<*>,
-        inclusive: Boolean = false,
-    ) {
-        navController.popBackStack(
-            route = route,
-            inclusive = inclusive,
-        )
+    inline fun <reified T : Any> popBackToRoute(inclusive: Boolean = false) {
+        navController.popBackStack<T>(inclusive)
     }
 }

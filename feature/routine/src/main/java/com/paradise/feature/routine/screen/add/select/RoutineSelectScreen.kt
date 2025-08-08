@@ -1,4 +1,4 @@
-package com.paradise.feature.routine.screen.add
+package com.paradise.feature.routine.screen.add.select
 
 import android.content.res.Configuration
 import androidx.compose.foundation.background
@@ -23,11 +23,13 @@ import com.paradise.core.designsystem.component.topappbar.MainTopAppBar
 import com.paradise.core.designsystem.theme.PtPtTheme
 
 @Composable
-internal fun RoutineAddScreen(
+internal fun RoutineSelectScreen(
+    onCloseClick: () -> Unit,
     onBackClick: () -> Unit,
     onPoseCountSelected: (Int) -> Unit,
 ) {
-    RoutineAddScreen(
+    RoutineSelectScreen(
+        onCloseClick = onCloseClick,
         onBackClick = onBackClick,
         onPoseCountSelected = onPoseCountSelected,
         modifier = Modifier,
@@ -35,7 +37,8 @@ internal fun RoutineAddScreen(
 }
 
 @Composable
-internal fun RoutineAddScreen(
+internal fun RoutineSelectScreen(
+    onCloseClick: () -> Unit,
     onBackClick: () -> Unit,
     onPoseCountSelected: (Int) -> Unit,
     modifier: Modifier = Modifier,
@@ -58,8 +61,7 @@ internal fun RoutineAddScreen(
                 PtPtIconButton(
                     imageVector = PtPtTheme.icon.cancel,
                     tint = PtPtTheme.color.textNormal,
-                    onClick = {
-                    },
+                    onClick = onCloseClick,
                 )
             },
         )
@@ -159,7 +161,8 @@ internal fun RoutineAddScreen(
 @Composable
 private fun RoutineAddScreenPreview() {
     PtPtTheme {
-        RoutineAddScreen(
+        RoutineSelectScreen(
+            onCloseClick = {},
             onBackClick = {},
             onPoseCountSelected = { /* no-op */ },
         )
