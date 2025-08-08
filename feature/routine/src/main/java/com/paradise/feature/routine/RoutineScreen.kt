@@ -17,7 +17,7 @@ import com.paradise.core.designsystem.component.icon.PtPtIconButton
 import com.paradise.core.designsystem.component.topappbar.MainTopAppBar
 import com.paradise.core.designsystem.theme.PtPtTheme
 import com.paradise.core.model.Category
-import com.paradise.feature.routine.component.CategoryCard
+import com.paradise.feature.routine.content.CategoryCard
 
 @Composable
 internal fun RoutineRoute(

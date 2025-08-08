@@ -24,16 +24,7 @@ sealed interface Route {
         data class RoutineCategory(val category: Category) : Route
 
         @Serializable
-        data object RoutineAdd : Route {
-            @Serializable
-            data object Analyze : Route
-
-            @Serializable
-            data object Save : Route
-
-            @Serializable
-            data object Select : Route
-        }
+        data object RoutineAdd : Route
     }
 
     @Serializable

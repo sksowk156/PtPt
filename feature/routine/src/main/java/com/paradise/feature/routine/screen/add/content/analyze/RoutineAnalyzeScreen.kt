@@ -1,4 +1,4 @@
-package com.paradise.feature.routine.screen.add.save
+package com.paradise.feature.routine.screen.add.content.analyze
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -8,11 +8,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 
 @Composable
-internal fun RoutineSaveScreen(
+internal fun RoutineAnalyzeScreen(
     onCloseClick: () -> Unit,
     onBackClick: () -> Unit,
 ) {
-    RoutineSaveScreen(
+    RoutineAnalyzeScreen(
         onCloseClick = onCloseClick,
         onBackClick = onBackClick,
         modifier = Modifier,
@@ -20,14 +20,14 @@ internal fun RoutineSaveScreen(
 }
 
 @Composable
-internal fun RoutineSaveScreen(
+internal fun RoutineAnalyzeScreen(
     onCloseClick: () -> Unit,
     onBackClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
         modifier = modifier
-            .background(Color.Red)
+            .background(Color.Blue)
             .fillMaxSize(),
     ) {
     }

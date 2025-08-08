@@ -45,13 +45,10 @@ fun AppNavHost(
                         appNavState.navigateUp()
                     },
                     onRoutineAddClick = {
-                        appNavState.navigateToRoute(route = Route.RoutineBase.RoutineAdd.Select)
+                        appNavState.navigateToRoute(route = Route.RoutineBase.RoutineAdd)
                     },
                     onRoutineCategoryClick = { category ->
                         appNavState.navigateToRoute(route = Route.RoutineBase.RoutineCategory(category))
-                    },
-                    onPoseCountSelected = {
-                        appNavState.navigateToRoute(route = Route.RoutineBase.RoutineAdd.Analyze)
                     },
                     onRoutineAddCloseClick = {
                         appNavState.popBackToRoute<Route.RoutineBase.RoutineCategory>()

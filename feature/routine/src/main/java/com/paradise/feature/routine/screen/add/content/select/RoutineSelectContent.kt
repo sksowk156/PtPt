@@ -1,11 +1,8 @@
-package com.paradise.feature.routine.screen.add.select
+package com.paradise.feature.routine.screen.add.content.select
 
-import android.content.res.Configuration
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -15,57 +12,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.paradise.core.designsystem.component.button.SecondaryButton
-import com.paradise.core.designsystem.component.icon.PtPtIconButton
-import com.paradise.core.designsystem.component.topappbar.MainTopAppBar
 import com.paradise.core.designsystem.theme.PtPtTheme
 
 @Composable
-internal fun RoutineSelectScreen(
-    onCloseClick: () -> Unit,
-    onBackClick: () -> Unit,
-    onPoseCountSelected: (Int) -> Unit,
-) {
-    RoutineSelectScreen(
-        onCloseClick = onCloseClick,
-        onBackClick = onBackClick,
-        onPoseCountSelected = onPoseCountSelected,
-        modifier = Modifier,
-    )
-}
-
-@Composable
-internal fun RoutineSelectScreen(
-    onCloseClick: () -> Unit,
-    onBackClick: () -> Unit,
-    onPoseCountSelected: (Int) -> Unit,
-    modifier: Modifier = Modifier,
-) {
-    Column(
-        modifier = modifier
-            .fillMaxSize()
-            .background(PtPtTheme.color.backgroundNormal),
-    ) {
-        MainTopAppBar(
-            leftContent = {
-                PtPtIconButton(
-                    imageVector = PtPtTheme.icon.back,
-                    tint = PtPtTheme.color.textNormal,
-                    onClick = onBackClick,
-                )
-            },
-            title = "상체 동작 추가하기",
-            rightContent = {
-                PtPtIconButton(
-                    imageVector = PtPtTheme.icon.cancel,
-                    tint = PtPtTheme.color.textNormal,
-                    onClick = onCloseClick,
-                )
-            },
-        )
-
+fun RoutineSelectContent(onPoseCountSelected: (Int) -> Unit) {
+    Column {
         Text(
             text = "몇 가지 동작을 등록할까요?",
             color = PtPtTheme.color.textStrong,
@@ -144,27 +97,5 @@ internal fun RoutineSelectScreen(
         )
 
         Spacer(Modifier.height(40.dp))
-    }
-}
-
-@Preview(
-    name = "CircuitAdd – Light",
-    showBackground = true,
-    backgroundColor = 0xFFF5F5F5,
-)
-@Preview(
-    name = "CircuitAdd – Dark",
-    uiMode = Configuration.UI_MODE_NIGHT_YES,
-    showBackground = true,
-    backgroundColor = 0xFF000000,
-)
-@Composable
-private fun RoutineAddScreenPreview() {
-    PtPtTheme {
-        RoutineSelectScreen(
-            onCloseClick = {},
-            onBackClick = {},
-            onPoseCountSelected = { /* no-op */ },
-        )
     }
 }

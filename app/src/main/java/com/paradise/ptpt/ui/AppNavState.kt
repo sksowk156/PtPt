@@ -27,6 +27,7 @@ class AppNavState(
 ) {
     private val hideBottomBarRoutes = setOf(
         Route.Auth::class,
+        Route.RoutineBase.RoutineAdd::class,
     )
 
     private val previousDestination = mutableStateOf<NavDestination?>(null)
