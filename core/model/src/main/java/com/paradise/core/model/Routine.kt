@@ -1,6 +1,6 @@
 package com.paradise.core.model
 
-data class Movement(
+data class Routine(
     val name: String,
     val stepCount: Int,
 )

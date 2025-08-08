@@ -12,17 +12,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.paradise.core.designsystem.theme.PtPtTheme
-import com.paradise.core.model.Movement
+import com.paradise.core.model.Routine
 
 @Composable
-fun MovementItem(
-    movement: Movement,
+fun RoutineItem(
+    routine: Routine,
     modifier: Modifier = Modifier,
-    content: @Composable MovementScope.() -> Unit,
+    content: @Composable RoutineScope.() -> Unit,
 ) {
-    val scope = remember(movement) {
-        object : MovementScope {
-            override val movement: Movement = movement
+    val scope = remember(routine) {
+        object : RoutineScope {
+            override val routine: Routine = routine
         }
     }
 
@@ -37,7 +37,7 @@ fun MovementItem(
         ) {
             Text(
                 modifier = Modifier.weight(1f),
-                text = scope.movement.name,
+                text = scope.routine.name,
                 style = PtPtTheme.typography.body04,
                 color = PtPtTheme.color.textNormal,
             )
@@ -48,12 +48,12 @@ fun MovementItem(
 }
 
 @Stable
-interface MovementScope {
-    val movement: Movement
+interface RoutineScope {
+    val routine: Routine
 }
 
 @Composable
-fun MovementScope.StepCount(modifier: Modifier = Modifier) {
+fun RoutineScope.StepCount(modifier: Modifier = Modifier) {
     Row(modifier = modifier) {
         Text(
             modifier = Modifier.padding(end = 8.dp),
@@ -63,7 +63,7 @@ fun MovementScope.StepCount(modifier: Modifier = Modifier) {
         )
 
         Text(
-            text = this@StepCount.movement.stepCount.toString(),
+            text = this@StepCount.routine.stepCount.toString(),
             style = PtPtTheme.typography.body03,
             color = PtPtTheme.color.primaryNormal,
         )
@@ -74,12 +74,12 @@ fun MovementScope.StepCount(modifier: Modifier = Modifier) {
 @Composable
 private fun MovementItemPreview() {
     PtPtTheme { // 테마 래핑
-        val sampleMovement = Movement(
+        val sampleRoutine = Routine(
             name = "푸시업",
             stepCount = 2,
         )
 
-        MovementItem(movement = sampleMovement) {
+        RoutineItem(routine = sampleRoutine) {
             StepCount(modifier = Modifier)
         }
     }

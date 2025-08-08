@@ -18,8 +18,8 @@ import com.paradise.core.designsystem.component.icon.PtPtIconButton
 import com.paradise.core.designsystem.component.topappbar.MainTopAppBar
 import com.paradise.core.designsystem.theme.PtPtTheme
 import com.paradise.core.model.Category
-import com.paradise.core.model.Movement
-import com.paradise.core.ui.MovementItem
+import com.paradise.core.model.Routine
+import com.paradise.core.ui.RoutineItem
 import com.paradise.core.ui.StepCount
 
 @Composable
@@ -31,7 +31,7 @@ internal fun CircuitCategoryScreen(
 ) {
     CircuitCategoryScreen(
         category = category,
-        movements = emptyList(),
+        routines = emptyList(),
         modifier = modifier,
         onBackClick = onBackClick,
         onAddClick = onAddClick,
@@ -41,7 +41,7 @@ internal fun CircuitCategoryScreen(
 @Composable
 internal fun CircuitCategoryScreen(
     category: Category,
-    movements: List<Movement>,
+    routines: List<Routine>,
     onBackClick: () -> Unit,
     onAddClick: () -> Unit,
     modifier: Modifier = Modifier,
@@ -80,11 +80,11 @@ internal fun CircuitCategoryScreen(
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
             items(
-                items = movements,
+                items = routines,
                 key = { it -> it.name },
             ) { movement ->
-                MovementItem(
-                    movement = movement,
+                RoutineItem(
+                    routine = movement,
                 ) {
                     StepCount(modifier = Modifier)
                 }
@@ -106,17 +106,17 @@ internal fun CircuitCategoryScreen(
 )
 @Composable
 private fun CircuitCategoryScreenPreview() {
-    val sampleMovements = listOf(
-        Movement("푸시업", 2),
-        Movement("풀업", 3),
-        Movement("버피", 4),
-        Movement("스쿼트", 3),
+    val sampleRoutines = listOf(
+        Routine("푸시업", 2),
+        Routine("풀업", 3),
+        Routine("버피", 4),
+        Routine("스쿼트", 3),
     )
 
     PtPtTheme {
         CircuitCategoryScreen(
             category = Category.Full,
-            movements = sampleMovements,
+            routines = sampleRoutines,
             onBackClick = {},
             onAddClick = {},
             modifier = Modifier,
