@@ -30,6 +30,7 @@ internal fun CircuitAddScreen(
     CircuitAddScreen(
         onBackClick = onBackClick,
         onMovementCountSelected = onMovementCountSelected,
+        modifier = Modifier,
     )
 }
 
