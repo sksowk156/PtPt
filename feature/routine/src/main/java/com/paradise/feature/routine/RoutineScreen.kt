@@ -1,4 +1,4 @@
-package com.paradise.feature.circuit
+package com.paradise.feature.routine
 
 import android.content.res.Configuration
 import androidx.compose.foundation.background
@@ -17,15 +17,15 @@ import com.paradise.core.designsystem.component.icon.PtPtIconButton
 import com.paradise.core.designsystem.component.topappbar.MainTopAppBar
 import com.paradise.core.designsystem.theme.PtPtTheme
 import com.paradise.core.model.Category
-import com.paradise.feature.circuit.component.CategoryCard
+import com.paradise.feature.routine.component.CategoryCard
 
 @Composable
-internal fun CircuitRoute(
+internal fun RoutineRoute(
     modifier: Modifier = Modifier,
     onBackClick: () -> Unit,
     onCategoryClick: (Category) -> Unit,
 ) {
-    CircuitScreen(
+    RoutineScreen(
         onBackClick = onBackClick,
         onCategoryClick = onCategoryClick,
         modifier = modifier,
@@ -33,7 +33,7 @@ internal fun CircuitRoute(
 }
 
 @Composable
-internal fun CircuitScreen(
+internal fun RoutineScreen(
     onBackClick: () -> Unit,
     onCategoryClick: (Category) -> Unit,
     modifier: Modifier = Modifier,
@@ -89,9 +89,9 @@ internal fun CircuitScreen(
     backgroundColor = 0xFF000000,
 )
 @Composable
-private fun CircuitScreenPreview() {
+private fun RoutineScreenPreview() {
     PtPtTheme {
-        CircuitScreen(
+        RoutineScreen(
             onBackClick = {},
             onCategoryClick = {},
         )

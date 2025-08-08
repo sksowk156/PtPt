@@ -1,4 +1,4 @@
-package com.paradise.feature.circuit.screen.add
+package com.paradise.feature.routine.screen.add
 
 import android.content.res.Configuration
 import androidx.compose.foundation.background
@@ -23,21 +23,21 @@ import com.paradise.core.designsystem.component.topappbar.MainTopAppBar
 import com.paradise.core.designsystem.theme.PtPtTheme
 
 @Composable
-internal fun CircuitAddScreen(
+internal fun RoutineAddScreen(
     onBackClick: () -> Unit,
-    onMovementCountSelected: (Int) -> Unit,
+    onPoseCountSelected: (Int) -> Unit,
 ) {
-    CircuitAddScreen(
+    RoutineAddScreen(
         onBackClick = onBackClick,
-        onMovementCountSelected = onMovementCountSelected,
+        onPoseCountSelected = onPoseCountSelected,
         modifier = Modifier,
     )
 }
 
 @Composable
-internal fun CircuitAddScreen(
+internal fun RoutineAddScreen(
     onBackClick: () -> Unit,
-    onMovementCountSelected: (Int) -> Unit,
+    onPoseCountSelected: (Int) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -113,7 +113,7 @@ internal fun CircuitAddScreen(
                 .padding(horizontal = 20.dp),
             text = "한 가지",
             onClick = {
-                onMovementCountSelected(1)
+                onPoseCountSelected(1)
             },
         )
 
@@ -122,7 +122,7 @@ internal fun CircuitAddScreen(
         SecondaryButton(
             text = "두 가지",
             onClick = {
-                onMovementCountSelected(2)
+                onPoseCountSelected(2)
             },
             modifier = Modifier
                 .fillMaxWidth()
@@ -134,7 +134,7 @@ internal fun CircuitAddScreen(
         SecondaryButton(
             text = "세 가지",
             onClick = {
-                onMovementCountSelected(3)
+                onPoseCountSelected(3)
             },
             modifier = Modifier
                 .fillMaxWidth()
@@ -157,11 +157,11 @@ internal fun CircuitAddScreen(
     backgroundColor = 0xFF000000,
 )
 @Composable
-private fun CircuitAddScreenPreview() {
+private fun RoutineAddScreenPreview() {
     PtPtTheme {
-        CircuitAddScreen(
+        RoutineAddScreen(
             onBackClick = {},
-            onMovementCountSelected = { /* no-op */ },
+            onPoseCountSelected = { /* no-op */ },
         )
     }
 }

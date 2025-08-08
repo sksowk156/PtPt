@@ -1,4 +1,4 @@
-package com.paradise.feature.circuit.screen.category
+package com.paradise.feature.routine.screen.category
 
 import android.content.res.Configuration
 import androidx.compose.foundation.background
@@ -23,13 +23,13 @@ import com.paradise.core.ui.RoutineItem
 import com.paradise.core.ui.StepCount
 
 @Composable
-internal fun CircuitCategoryScreen(
+internal fun RoutineCategoryScreen(
     category: Category,
     modifier: Modifier = Modifier,
     onBackClick: () -> Unit,
     onAddClick: () -> Unit,
 ) {
-    CircuitCategoryScreen(
+    RoutineCategoryScreen(
         category = category,
         routines = emptyList(),
         modifier = modifier,
@@ -39,7 +39,7 @@ internal fun CircuitCategoryScreen(
 }
 
 @Composable
-internal fun CircuitCategoryScreen(
+internal fun RoutineCategoryScreen(
     category: Category,
     routines: List<Routine>,
     onBackClick: () -> Unit,
@@ -105,7 +105,7 @@ internal fun CircuitCategoryScreen(
     backgroundColor = 0xFF000000,
 )
 @Composable
-private fun CircuitCategoryScreenPreview() {
+private fun RoutineCategoryScreenPreview() {
     val sampleRoutines = listOf(
         Routine("푸시업", 2),
         Routine("풀업", 3),
@@ -114,7 +114,7 @@ private fun CircuitCategoryScreenPreview() {
     )
 
     PtPtTheme {
-        CircuitCategoryScreen(
+        RoutineCategoryScreen(
             category = Category.Full,
             routines = sampleRoutines,
             onBackClick = {},

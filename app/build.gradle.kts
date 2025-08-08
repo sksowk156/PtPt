@@ -28,7 +28,7 @@ android {
 dependencies {
     implementation(projects.feature.auth)
     implementation(projects.feature.home)
-    implementation(projects.feature.circuit)
+    implementation(projects.feature.routine)
     implementation(projects.feature.my)
     implementation(projects.feature.record)
     implementation(projects.feature.tracking)

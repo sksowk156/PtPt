@@ -1,4 +1,4 @@
-package com.paradise.feature.circuit.component
+package com.paradise.feature.routine.component
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize

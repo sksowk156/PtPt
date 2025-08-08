@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.paradise.feature.circuit"
+    namespace = "com.paradise.feature.routine"
 }
 
 dependencies {

@@ -16,16 +16,16 @@ sealed interface Route {
     data object Home : Route
 
     @Serializable
-    data object CircuitBase : Route
+    data object RoutineBase : Route {
+        @Serializable
+        data object RoutineRoute : Route
 
-    @Serializable
-    data object CircuitRoute : Route
+        @Serializable
+        data object RoutineAdd : Route
 
-    @Serializable
-    data object CircuitAdd : Route
-
-    @Serializable
-    data class CircuitCategory(val category: Category) : Route
+        @Serializable
+        data class RoutineCategory(val category: Category) : Route
+    }
 
     @Serializable
     data object My : Route

@@ -30,18 +30,18 @@ import com.paradise.core.designsystem.theme.PtPtTheme
 
 @Composable
 internal fun HomeRoute(
-    onCircuitTrainigClick: () -> Unit,
+    onRoutineClick: () -> Unit,
     onTrackingClick: () -> Unit,
 ) {
     HomeScreen(
-        onCircuitTrainigClick = onCircuitTrainigClick,
+        onRoutineClick = onRoutineClick,
         onTrackingClick = onTrackingClick,
     )
 }
 
 @Composable
 internal fun HomeScreen(
-    onCircuitTrainigClick: () -> Unit,
+    onRoutineClick: () -> Unit,
     onTrackingClick: () -> Unit,
 ) {
     Box(modifier = Modifier.fillMaxSize()) {
@@ -88,7 +88,7 @@ internal fun HomeScreen(
                 WorkoutTypeCard(
                     title = "무산소\n운동",
                     subTitle = "N일 전 운동",
-                    onClick = onCircuitTrainigClick,
+                    onClick = onRoutineClick,
                     modifier = Modifier.weight(1f),
                 )
 
@@ -172,7 +172,7 @@ private fun WorkoutTypeCard(
 private fun HomeScreenPreview() {
     PtPtTheme {
         HomeScreen(
-            onCircuitTrainigClick = {},
+            onRoutineClick = {},
             onTrackingClick = {},
         )
     }

@@ -9,10 +9,10 @@ import androidx.navigation.compose.navigation
 import androidx.navigation.createGraph
 import com.paradise.core.ui.route.Route
 import com.paradise.feature.auth.navigation.authScreen
-import com.paradise.feature.circuit.navigation.circuitScreen
 import com.paradise.feature.home.navigation.homeScreen
 import com.paradise.feature.my.navigation.myScreen
 import com.paradise.feature.record.navigation.recordScreen
+import com.paradise.feature.routine.navigation.routineScreen
 import com.paradise.feature.tracking.navigation.trackingScreen
 import com.paradise.ptpt.contract.AppState
 import com.paradise.ptpt.ui.AppNavState
@@ -33,24 +33,24 @@ fun AppNavHost(
         navController.createGraph(startDestination = startDest) {
             navigation<Route.HomeBase>(startDestination = Route.Home) {
                 homeScreen(
-                    onCircuitTrainigClick = {
-                        appNavState.navigateToRoute(route = Route.CircuitBase)
+                    onRoutineClick = {
+                        appNavState.navigateToRoute(route = Route.RoutineBase)
                     },
                     onTrackingClick = {
                         appNavState.navigateToRoute(route = Route.Tracking)
                     },
                 )
-                circuitScreen(
+                routineScreen(
                     onBackClick = {
                         appNavState.navigateUp()
                     },
-                    onCircuitAddClick = {
-                        appNavState.navigateToRoute(route = Route.CircuitAdd)
+                    onRoutineAddClick = {
+                        appNavState.navigateToRoute(route = Route.RoutineBase.RoutineAdd)
                     },
-                    onCircuitCategoryClick = { category ->
-                        appNavState.navigateToRoute(route = Route.CircuitCategory(category))
+                    onRoutineCategoryClick = { category ->
+                        appNavState.navigateToRoute(route = Route.RoutineBase.RoutineCategory(category))
                     },
-                    onMovementCountSelected = {
+                    onPoseCountSelected = {
                     },
                 )
                 trackingScreen()

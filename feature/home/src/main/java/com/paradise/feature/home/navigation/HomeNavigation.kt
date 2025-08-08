@@ -6,12 +6,12 @@ import com.paradise.core.ui.route.Route
 import com.paradise.feature.home.HomeRoute
 
 fun NavGraphBuilder.homeScreen(
-    onCircuitTrainigClick: () -> Unit,
+    onRoutineClick: () -> Unit,
     onTrackingClick: () -> Unit,
 ) {
     composable<Route.Home> {
         HomeRoute(
-            onCircuitTrainigClick = onCircuitTrainigClick,
+            onRoutineClick = onRoutineClick,
             onTrackingClick = onTrackingClick,
         )
     }
