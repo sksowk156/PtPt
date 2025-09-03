@@ -14,6 +14,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.paradise.core.designsystem.component.icon.PtPtIconButton
 import com.paradise.core.designsystem.component.topappbar.MainTopAppBar
 import com.paradise.core.designsystem.theme.PtPtTheme
+import com.paradise.feature.routine.screen.add.content.analyze.RoutineAnalyzeContent
+import com.paradise.feature.routine.screen.add.content.save.RoutineSaveContent
 import com.paradise.feature.routine.screen.add.content.select.RoutineSelectContent
 import com.paradise.feature.routine.screen.add.model.RoutineAddStep
 
@@ -93,14 +95,6 @@ internal fun RoutineAddScreen(
             }
         }
     }
-}
-
-@Composable
-fun RoutineSaveContent(onSaveComplete: () -> Unit) {
-}
-
-@Composable
-fun RoutineAnalyzeContent(onAnalyzeComplete: () -> Unit) {
 }
 
 @Preview(
