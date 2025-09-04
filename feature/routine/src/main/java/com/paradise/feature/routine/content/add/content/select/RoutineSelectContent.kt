@@ -1,4 +1,4 @@
-package com.paradise.feature.routine.screen.add.content.select
+package com.paradise.feature.routine.content.add.content.select
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row

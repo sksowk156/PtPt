@@ -1,4 +1,4 @@
-package com.paradise.feature.routine.screen.add.model
+package com.paradise.feature.routine.model
 
 enum class RoutineAddStep {
     SELECT,

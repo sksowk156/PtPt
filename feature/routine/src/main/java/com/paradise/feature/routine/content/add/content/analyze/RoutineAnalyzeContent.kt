@@ -1,4 +1,4 @@
-package com.paradise.feature.routine.screen.add.content.analyze
+package com.paradise.feature.routine.content.add.content.analyze
 
 import PrimaryButton
 import androidx.compose.foundation.background

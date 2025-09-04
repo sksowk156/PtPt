@@ -1,4 +1,4 @@
-package com.paradise.feature.routine.screen.add.content.save
+package com.paradise.feature.routine.content.add.content.save
 
 import PrimaryButton
 import androidx.compose.foundation.Image
