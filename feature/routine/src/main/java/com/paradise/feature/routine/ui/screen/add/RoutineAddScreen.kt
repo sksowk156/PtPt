@@ -1,4 +1,4 @@
-package com.paradise.feature.routine.content.add
+package com.paradise.feature.routine.ui.screen.add
 
 import android.content.res.Configuration
 import androidx.compose.foundation.background
@@ -14,10 +14,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.paradise.core.designsystem.component.icon.PtPtIconButton
 import com.paradise.core.designsystem.component.topappbar.MainTopAppBar
 import com.paradise.core.designsystem.theme.PtPtTheme
-import com.paradise.feature.routine.content.add.content.analyze.RoutineAnalyzeContent
-import com.paradise.feature.routine.content.add.content.save.RoutineSaveContent
-import com.paradise.feature.routine.content.add.content.select.RoutineSelectContent
 import com.paradise.feature.routine.model.RoutineAddStep
+import com.paradise.feature.routine.ui.screen.add.screen.analyze.RoutineAnalyzeContent
+import com.paradise.feature.routine.ui.screen.add.screen.save.RoutineSaveContent
+import com.paradise.feature.routine.ui.screen.add.screen.select.RoutineSelectContent
 
 @Composable
 internal fun RoutineAddScreen(onCloseClick: () -> Unit) {

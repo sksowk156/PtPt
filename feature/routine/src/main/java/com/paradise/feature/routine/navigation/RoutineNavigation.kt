@@ -6,9 +6,9 @@ import androidx.navigation.compose.navigation
 import androidx.navigation.toRoute
 import com.paradise.core.model.Category
 import com.paradise.core.ui.route.Route
-import com.paradise.feature.routine.RoutineRoute
-import com.paradise.feature.routine.content.add.RoutineAddScreen
-import com.paradise.feature.routine.content.category.RoutineCategoryScreen
+import com.paradise.feature.routine.ui.RoutineRoute
+import com.paradise.feature.routine.ui.screen.add.RoutineAddScreen
+import com.paradise.feature.routine.ui.screen.category.RoutineCategoryScreen
 
 fun NavGraphBuilder.routineScreen(
     onBackClick: () -> Unit,

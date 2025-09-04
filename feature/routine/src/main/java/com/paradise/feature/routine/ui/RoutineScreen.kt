@@ -1,4 +1,4 @@
-package com.paradise.feature.routine
+package com.paradise.feature.routine.ui
 
 import android.content.res.Configuration
 import androidx.compose.foundation.background

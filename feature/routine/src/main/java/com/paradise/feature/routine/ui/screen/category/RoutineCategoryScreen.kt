@@ -1,4 +1,4 @@
-package com.paradise.feature.routine.content.category
+package com.paradise.feature.routine.ui.screen.category
 
 import android.content.res.Configuration
 import androidx.compose.foundation.background
