@@ -1,6 +1,10 @@
 package com.paradise.feature.routine.ui.screen.category.screen.setup.screen.rest
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -15,7 +19,6 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -34,6 +37,7 @@ import com.paradise.feature.routine.model.SetConfig
 import com.paradise.feature.routine.ui.component.RestModeCard
 import com.paradise.feature.routine.ui.component.SettingSummaryChip
 import com.paradise.feature.routine.ui.component.TimeChip
+import com.paradise.feature.routine.ui.component.TimePicker
 
 @Composable
 fun RestSetup(
@@ -45,7 +49,8 @@ fun RestSetup(
 ) {
     // 상태 관리
     var restMode by remember { mutableStateOf(initialConfig?.mode ?: RestMode.MANUAL) }
-    var restSeconds by remember { mutableStateOf(initialConfig?.seconds ?: 60) }
+    var restMinutes by remember { mutableStateOf((initialConfig?.seconds ?: 60) / 60) }
+    var restSeconds by remember { mutableStateOf((initialConfig?.seconds ?: 60) % 60) }
 
     Column(
         modifier = Modifier.padding(20.dp),
@@ -55,15 +60,27 @@ fun RestSetup(
             style = PtPtTheme.typography.body02,
         )
 
-        // 이전 설정들 요약
+        // 이전 설정들 요약 - Count Up일 때는 다르게 표시
         Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = 16.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
-            SettingSummaryChip("${repConfig.count}회 ${if (repConfig.isCountUp) "↑" else "↓"}")
-            SettingSummaryChip("${setConfig.count}세트 ${if (setConfig.isCountUp) "↑" else "↓"}")
+            SettingSummaryChip(
+                if (repConfig.isCountUp) {
+                    "Count Up 모드"
+                } else {
+                    "${repConfig.count}회 Count Down"
+                },
+            )
+            SettingSummaryChip(
+                if (setConfig.isCountUp) {
+                    "세트 수 제한 없음"
+                } else {
+                    "${setConfig.count}세트 목표"
+                },
+            )
         }
 
         Spacer(modifier = Modifier.height(24.dp))
@@ -71,12 +88,14 @@ fun RestSetup(
         // 휴식 모드 선택
         Text("휴식 방식", style = PtPtTheme.typography.body01)
 
+        Spacer(modifier = Modifier.height(12.dp))
+
         Column(
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
             RestModeCard(
                 selected = restMode == RestMode.MANUAL,
-                icon = PtPtTheme.icon.location,
+                icon = PtPtTheme.icon.time,
                 title = "수동 휴식",
                 description = "준비되면 직접 다음 세트 시작",
                 onClick = { restMode = RestMode.MANUAL },
@@ -92,34 +111,55 @@ fun RestSetup(
         }
 
         // 자동 휴식 선택 시 시간 설정
-        AnimatedVisibility(visible = restMode == RestMode.AUTO) {
+        AnimatedVisibility(
+            visible = restMode == RestMode.AUTO,
+            enter = fadeIn() + expandVertically(),
+            exit = fadeOut() + shrinkVertically(),
+        ) {
             Column(
-                modifier = Modifier.padding(top = 20.dp),
+                modifier = Modifier.padding(top = 24.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 Text("휴식 시간", style = PtPtTheme.typography.body01)
 
-                // 시간 선택 슬라이더
-                Slider(
-                    value = restSeconds.toFloat(),
-                    onValueChange = { restSeconds = it.toInt() },
-                    valueRange = 10f..180f,
-                    steps = 16,
+                Spacer(modifier = Modifier.height(16.dp))
+
+                // 분/초 선택기
+                TimePicker(
+                    minutes = restMinutes,
+                    seconds = restSeconds,
+                    onTimeChange = { min, sec ->
+                        restMinutes = min
+                        restSeconds = sec
+                    },
+                    modifier = Modifier.fillMaxWidth(),
                 )
 
-                Text(
-                    "${restSeconds}초",
-                    style = PtPtTheme.typography.body03,
-                    modifier = Modifier.align(Alignment.CenterHorizontally),
-                )
+                Spacer(modifier = Modifier.height(24.dp))
 
                 // 퀵 선택
+                Text("빠른 선택", style = PtPtTheme.typography.caption01)
+                Spacer(modifier = Modifier.height(8.dp))
                 Row(
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceEvenly,
                 ) {
-                    TimeChip("30초", restSeconds == 30) { restSeconds = 30 }
-                    TimeChip("60초", restSeconds == 60) { restSeconds = 60 }
-                    TimeChip("90초", restSeconds == 90) { restSeconds = 90 }
-                    TimeChip("2분", restSeconds == 120) { restSeconds = 120 }
+                    TimeChip("30초", restMinutes == 0 && restSeconds == 30) {
+                        restMinutes = 0
+                        restSeconds = 30
+                    }
+                    TimeChip("1분", restMinutes == 1 && restSeconds == 0) {
+                        restMinutes = 1
+                        restSeconds = 0
+                    }
+                    TimeChip("1분 30초", restMinutes == 1 && restSeconds == 30) {
+                        restMinutes = 1
+                        restSeconds = 30
+                    }
+                    TimeChip("2분", restMinutes == 2 && restSeconds == 0) {
+                        restMinutes = 2
+                        restSeconds = 0
+                    }
                 }
             }
         }
@@ -144,13 +184,31 @@ fun RestSetup(
                     horizontalArrangement = Arrangement.SpaceBetween,
                 ) {
                     Column {
-                        Text("총 ${repConfig.count * setConfig.count}회")
-                        Text("${setConfig.count}세트 × ${repConfig.count}회")
+                        if (repConfig.isCountUp) {
+                            Text("Count Up 모드")
+                            Text("목표 없음")
+                        } else {
+                            Text("Count Down 모드")
+                            Text("${repConfig.count}회 목표")
+                        }
+
+                        if (setConfig.isCountUp) {
+                            Text("세트 수: 무제한")
+                        } else {
+                            Text("${setConfig.count}세트 목표")
+                        }
                     }
                     Column(horizontalAlignment = Alignment.End) {
                         Text(if (restMode == RestMode.AUTO) "자동 휴식" else "수동 휴식")
                         if (restMode == RestMode.AUTO) {
-                            Text("${restSeconds}초")
+                            restMinutes * 60 + restSeconds
+                            Text(
+                                if (restMinutes > 0) {
+                                    "${restMinutes}분 ${restSeconds}초"
+                                } else {
+                                    "${restSeconds}초"
+                                },
+                            )
                         }
                     }
                 }
@@ -171,11 +229,18 @@ fun RestSetup(
             }
             Button(
                 onClick = {
-                    val finalRestConfig = RestConfig(
-                        mode = restMode,
-                        seconds = if (restMode == RestMode.AUTO) restSeconds else null,
+                    val totalSeconds = if (restMode == RestMode.AUTO) {
+                        restMinutes * 60 + restSeconds
+                    } else {
+                        null
+                    }
+
+                    onComplete(
+                        RestConfig(
+                            mode = restMode,
+                            seconds = totalSeconds,
+                        ),
                     )
-                    onComplete(finalRestConfig)
                 },
                 modifier = Modifier.weight(1f),
             ) {
@@ -183,7 +248,7 @@ fun RestSetup(
                     horizontalArrangement = Arrangement.Center,
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
-                    Icon(imageVector = PtPtTheme.icon.plus, contentDescription = "")
+                    Icon(imageVector = PtPtTheme.icon.front, contentDescription = "")
                     Spacer(Modifier.width(8.dp))
                     Text("운동 시작")
                 }
